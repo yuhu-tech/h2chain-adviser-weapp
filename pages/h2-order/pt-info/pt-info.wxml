@@ -1,0 +1,56 @@
+<!--pages/h2-order/pt-info/pt-info.wxml-->
+<view class='page'>
+  <view class='page_bd'>
+
+    <view class='card'>
+
+      <view class='card_info'>
+        <image src='{{pt_info.avatar}}'></image>
+        <view class='card_info_text'>
+          <view class='card_info_top'>
+            <text class='card_info_text_l'>{{pt_info.name}}</text>
+            <view class='card_info_text_r b200' bindtap='doCall'>
+              <image src='/images/order-phone.png' />
+              <text>立刻联系</text>
+            </view>
+          </view>
+          <view class='n200 text_min'>
+            <text>{{pt_info.gender}}</text>
+            <text class='card_info_text_item'>{{pt_info.age}}岁</text>
+            <text class='card_info_text_item'>{{pt_info.nickName}}</text>
+          </view>
+        </view>
+      </view>
+
+      <view class='card_cell'>
+        <text>身高</text>
+        <text>{{pt_info.height}}cm</text>
+      </view>
+
+      <view class='card_cell'>
+        <text>体重</text>
+        <text>{{pt_info.weight}}kg</text>
+      </view>
+
+    </view>
+
+    <wux-divider text="工作统计" />
+    <view class='statistics'>
+      <view class='statistics_item'>工作次数：{{job_count}}次</view>
+      <view class='statistics_bd' />
+      <view class='statistics_item'>累计工时：{{job_hour}}小时</view>
+    </view>
+
+    <wux-divider text="最近五次工作" />
+    <view class='latest'>
+      <block wx:for="{{latest}}" wx:key="">
+        <view class='latest_item'>
+          <text>{{item.job}}</text>
+          <text class='text_min n200'>{{item.hotel_name}}</text>
+        </view>
+        <wux-white-space body-style="heignt:30rpx" />
+      </block>
+    </view>
+
+  </view>
+</view>

@@ -1,0 +1,30 @@
+<!--pages/h2-order/template-order/template-order.wxml-->
+<view class='page'>
+  <view class='page_bd'>
+
+    <radio-group class="radio-group" bindchange="radioChange">
+      <label class="radio" wx:for="{{list}}" wx:key="">
+        <view class='radio_l'>
+          <radio value="{{item.value}}" color='#50d9e3' />
+          <view class='radio_content n200'>{{item.content}}</view>
+        </view>
+        <view class='radio_edit b200' bindtap='doEdit'>
+          <text>编辑</text>
+        </view>
+      </label>
+      <view class='fake'>
+        <view class='fab' bindtap='doEdit' data-add='add'>
+          <wux-icon type="ios-add" size='30' />
+        </view>
+      </view>
+      <wux-white-space body-style='height:400rpx' />
+    </radio-group>
+
+    <view class='btn_box'>
+      <wux-button type='main' bind:click="doSubmit">
+        <view class='text_btn'>完成</view>
+      </wux-button>
+    </view>
+
+  </view>
+</view>

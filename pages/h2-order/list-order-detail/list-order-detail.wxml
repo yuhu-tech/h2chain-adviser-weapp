@@ -1,0 +1,181 @@
+<!--pages/h2-order/list-order-detail/list-order-detail.wxml-->
+<view class='page'>
+  <view class='page_bd'>
+    <wux-row>
+      <view class='top_card'>
+        <view class='top_card_top'>
+          <image src='/images/order-avatar.png' />
+          <view>{{order_info.originorder.occupation}}</view>
+        </view>
+
+        <view class='modified' wx:if="{{order_info.modifiedorder.length>0}}">
+          <wux-white-space body-style="height:10rpx" />
+          <view class='top_card_cen'>
+            <view>
+              <text>{{order_info.originorder.date}}</text>
+              <text class='blank'>{{order_info.originorder.time}}</text>
+            </view>
+            <view wx:if="{{order_info.originorder.mode===0}}">
+              <text>{{order_info.countyet}}/{{order_info.originorder.count}}</text>
+            </view>
+            <view wx:else>
+              <text>{{order_info.maleyet}}/{{order_info.originorder.male}} 男</text>
+              <text class='blank'>{{order_info.femaleyet}}/{{order_info.originorder.female}} 女</text>
+            </view>
+            <view class='top_card_cen_bd' />
+          </view>
+        </view>
+
+        <wux-white-space body-style="height:20rpx" />
+        <view class='top_card_cen'>
+
+          <view>
+            <text>{{order_info.modifiedorder[0].date||order_info.originorder.date}}</text>
+            <text class='blank'>{{order_info.modifiedorder[0].time||order_info.originorder.time}}</text>
+          </view>
+          <view wx:if="{{order_info.modifiedorder.length>0?(order_info.modifiedorder[0].changedmode===0):(order_info.originorder.mode===0)}}">
+            <text>{{order_info.countyet}}/{{order_info.modifiedorder[0].changedcount||order_info.originorder.count}}</text>
+          </view>
+          <view wx:else>
+            <text>{{order_info.maleyet}}/{{order_info.modifiedorder[0].changedmale||order_info.originorder.male}} 男</text>
+            <text class='blank'>{{order_info.femaleyet}}/{{order_info.modifiedorder[0].changedfemale||order_info.originorder.female}} 女</text>
+          </view>
+
+        </view>
+
+
+        <wux-white-space body-style="height:20rpx" />
+        <view class='top_card_btm text_min'>
+          <view class='top_card_btm_name'>{{order_info.hotel.hotelname}}</view>
+          <view>{{order_info.postorder.salary}}元/小时</view>
+        </view>
+      </view>
+    </wux-row>
+    <wux-row>
+      <view class='search_bar'>
+        <view class='search'>
+        
+          <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+            <view class='picker'>
+              <view></view>
+              <view>{{regMode?regMode:'报名渠道'}}</view>
+              <view class='picker_icon'>
+                <wux-icon type='md-arrow-dropdown' />
+              </view>
+            </view>
+          </picker>
+
+        </view>
+        <view class='search n200'>
+          <input confirm-type='search' placeholder='输入姓名昵称' placeholder-class='search_p' bindconfirm='search' />
+        </view>
+      </view>
+    </wux-row>
+
+    <view class='divider_r'>
+      <wux-divider position="right" text="待确认" />
+    </view>
+
+    <block wx:for="{{pt_list_wait}}" wx:key="">
+      <wux-row>
+        <view class='list'>
+          <view class='list_card'>
+            <view class='list_card_top'>
+              <view class='list_card_l'>
+                <image class='list_card_avatar' src='/images/order-avatar.png' />
+                <view>
+                  <view class='list_card_l_top'>
+                    <text class='list_card_l_top_name'>姓名</text>
+                    <view class='list_card_l_top_name_phone' bindtap='doCall'>
+                      <image src='/images/order-phone.png'></image>
+                      <text class='b200'>立刻联系</text>
+                    </view>
+                  </view>
+                  <wux-white-space body-style="height:10rpx" />
+                  <view class='list_card_l_btm text_min n200'>
+                    <text>女</text>
+                    <text class='list_card_l_btm_age'>24岁</text>
+                    <text>这里显示微信昵称</text>
+                  </view>
+                </view>
+              </view>
+              <view class='list_card_r n200'>
+                <view class='link_arrow' bindtap='goPtInfo'>
+                  <wux-icon type="ios-arrow-forward" size='20' />
+                </view>
+              </view>
+            </view>
+            <view class='list_card_btm'>
+              <view class='list_card_btm_top'>
+                <text>工作次数：4次</text>
+                <text>用户端报名</text>
+              </view>
+              <wux-white-space body-style="height:20rpx" />
+              <view class='list_card_btm_btm_btn'>
+                <wux-button type='main' outline bind:click="doOut">
+                  <view class='text_btn'>拒绝</view>
+                </wux-button>
+                <view class='blank' />
+                <wux-button type='main' bind:click="doIn">
+                  <view class='text_btn'>继续参加</view>
+                </wux-button>
+              </view>
+            </view>
+          </view>
+        </view>
+      </wux-row>
+    </block>
+
+    <view class='divider_n'>
+      <wux-divider position="right" text="已报名" />
+    </view>
+
+    <block wx:for="{{pt_list_done}}" wx:key="">
+      <wux-row>
+        <view class='list'>
+          <view class='list_card'>
+            <view class='list_card_top'>
+              <view class='list_card_l'>
+                <image class='list_card_avatar' src='/images/order-avatar.png' />
+                <view>
+                  <view class='list_card_l_top'>
+                    <text class='list_card_l_top_name'>姓名</text>
+                    <view class='list_card_l_top_name_phone' bindtap='doCall'>
+                      <image src='/images/order-phone.png'></image>
+                      <text class='b200'>立刻联系</text>
+                    </view>
+                  </view>
+                  <wux-white-space body-style="height:10rpx" />
+                  <view class='list_card_l_btm text_min n200'>
+                    <text>女</text>
+                    <text class='list_card_l_btm_age'>24岁</text>
+                    <text>这里显示微信昵称</text>
+                  </view>
+                </view>
+              </view>
+              <view class='list_card_r n200'>
+                <view class='link_arrow' bindtap='goPtInfo'>
+                  <wux-icon type="ios-arrow-forward" size='20' />
+                </view>
+              </view>
+            </view>
+            <view class='list_card_btm'>
+              <view class='list_card_btm_top'>
+                <text>工作次数：4次</text>
+                <text>用户端报名</text>
+              </view>
+              <wux-white-space body-style="height:20rpx" />
+              <view class='list_card_btm_btm_btn'>
+                <wux-button type='main' outline bind:click="doOut">
+                  <view class='text_btn'>拒绝</view>
+                </wux-button>
+              </view>
+            </view>
+          </view>
+          <wux-white-space body-style="height:30rpx" />
+        </view>
+      </wux-row>
+    </block>
+
+  </view>
+</view>

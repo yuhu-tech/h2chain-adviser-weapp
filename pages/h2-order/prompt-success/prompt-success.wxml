@@ -1,0 +1,42 @@
+<!--pages/h2-order/prompt-success/prompt-success.wxml-->
+
+
+<view class='card'>
+  <image src='/images/bg-b.png' mode='aspectFill'></image>
+  <view class='position_top'>
+    <view class='card_icon'>
+      <image src='/images/bg-success.png'></image>
+      <view>发布成功</view>
+    </view>
+  </view>
+  <view class='position_btm'>
+    <view>
+      <view class='position_btm_text'>分享链接，更快招到合适人选！</view>
+      <wux-divider show-text="{{ false }}" />
+      <view class='card_share'>
+        <view></view>
+        <button open-type='share' data-type='pt'>
+          <view class='card_share_item'>
+            <image src='/images/bg-pt.png' />
+            <text>分享给PT</text>
+          </view>
+        </button>
+        <button open-type='share' data-type='adviser'>
+          <view class='card_share_item'>
+            <image src='/images/bg-adviser.png' />
+            <text>分享给顾问</text>
+          </view>
+        </button>
+        <view></view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class='btn'>
+  <wux-button type='main' bind:click="goReturn">
+    <view class='btn_text'>
+      <text>返回</text>
+    </view>
+  </wux-button>
+</view>

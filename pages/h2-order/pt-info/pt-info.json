@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "wux-divider": "wux-weapp/divider",
+    "wux-white-space": "wux-weapp/white-space"
+  },
+  "navigationBarTitleText": "PT详情"
+}

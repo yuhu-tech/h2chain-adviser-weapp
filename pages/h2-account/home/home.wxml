@@ -1,0 +1,42 @@
+<!--pages/h2-account/home/home.wxml-->
+<view class="page">
+  <view class="page__hd">
+    <view class="page__title"></view>
+    <view class="page__desc"></view>
+  </view>
+  <view class="page__bd">
+    <wux-row>
+      <view class='info_card'>
+        <view>{{userInfo.nickName}}</view>
+        <image class='avatar' src="{{userInfo.avatarUrl}}"></image>
+      </view>
+    </wux-row>
+    <wux-row>
+      <wux-cell-group>
+        <wux-cell title="姓名" extra='{{qlInfo.name}}' hover-class="none"></wux-cell>
+        <view class='bd_btm' />
+        <wux-cell title="手机" extra='{{qlInfo.phone}}' hover-class="none"></wux-cell>
+        <view class='bd_btm' />
+        <wux-cell title="公司名称" extra='{{qlInfo.companyname}}' hover-class="none"></wux-cell>
+      </wux-cell-group>
+    </wux-row>
+    <wux-white-space body-style='height:15rpx' />
+    <wux-row>
+      <wux-cell-group>
+        <wux-cell thumb="/images/home-pt.png" title="PT列表" isLink bind:click="showWaiting"></wux-cell>
+        <view class='bd_btm' />
+        <wux-cell thumb="/images/home-history.png" title="历史订单" isLink url="/pages/h2-order/history-order/history-order"></wux-cell>
+        <view class='bd_btm' />
+        <wux-cell thumb="/images/home-adviser.png" title="代理列表" isLink bind:click="showWaiting"></wux-cell>
+        <view class='bd_btm' />
+        <wux-cell thumb="/images/home-psw.png" title="修改密码" isLink url="/pages/h2-account/change-password/change-password"></wux-cell>
+        <view class='bd_btm' />
+      </wux-cell-group>
+    </wux-row>
+    <wux-row>
+      <view class='logout y200'>
+        <text bindtap='doLogout'>退出登录</text>
+      </view>
+    </wux-row>
+  </view>
+</view>

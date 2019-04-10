@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "wux-icon": "wux-weapp/icon",
+    "wux-white-space": "wux-weapp/white-space",
+    "wux-button": "wux-weapp/button"
+  },
+  "navigationBarTitleText": "选择模板"
+}

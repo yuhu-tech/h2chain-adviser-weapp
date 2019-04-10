@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "wux-button": "wux-weapp/button",
+    "wux-divider": "wux-weapp/divider"
+  },
+  "navigationBarTitleText": "关闭订单"
+}

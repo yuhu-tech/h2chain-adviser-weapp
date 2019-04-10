@@ -1,0 +1,35 @@
+/* pages/h2-order/template-new/template-new.wxss */
+
+page, .page {
+  height: 100%;
+}
+
+/* area */
+
+.area {
+  padding: 30rpx;
+  box-shadow: 0 0 10rpx #eee;
+}
+
+textarea {
+  height: 500rpx;
+  width: 100%;
+}
+
+/* btn */
+
+.btn_box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 30rpx 0;
+  background-color: #fff;
+  box-shadow: 0 0 20rpx #eee;
+}
+
+.text_btn {
+  width: 500rpx;
+}

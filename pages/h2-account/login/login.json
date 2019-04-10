@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "wux-row": "wux-weapp/row",
+    "wux-white-space": "wux-weapp/white-space",
+    "wux-input": "wux-weapp/input",
+    "wux-button": "wux-weapp/button",
+    "toptip": "/components/toptip/toptip"
+  }
+}
