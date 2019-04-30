@@ -1,26 +1,28 @@
 // pages/h2-order/template-new/template-new.js
+var gql = require('../../../utils/graphql.js')
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    type: 'content',
-    add: '',
-    template: '',
-    list: [],
-    idx: ''
+    type: 'workcontents',
+    optiontype: 'add',
+    id: '',
+    value: null
   },
 
-  /**
+  /** 
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
     this.setData({
       type: options.type,
-      add: options.add ? options.add : ''
+      optiontype: options.optiontype,
+      value: options.value === 'undefined' ? null : options.value,
+      id: options.id
     })
-    console.log(this.data.add)
   },
 
   /**
@@ -34,33 +36,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    /* 获取列表 */
-    wx.getStorage({
-      key: this.data.type,
-      success: res => {
-        this.setData({
-          list: res.data
-        })
-      },
-      fail: err => {
-        wx.setStorage({
-          key: this.data.type,
-          data: [],
-        })
-      }
-    })
-    /* 编辑的情况下获取该条内容 */
-    if (this.data.add !== 'add') {
-      wx.getStorage({
-        key: this.data.type === 'content' ? 'idx_content' : 'idx_attention',
-        success: res => {
-          this.setData({
-            idx: res.data,
-            template: this.data.list[res.data].content
-          })
-        },
-      })
-    }
+
   },
 
   /**
@@ -100,26 +76,64 @@ Page({
 
   iptTemp: function(e) {
     this.setData({
-      template: e.detail.value
+      value: e.detail.value
     })
   },
 
   doSubmit: function() {
-    if (this.data.add !== 'add') {
-      this.data.list[this.data.idx].content = this.data.template
+    let value = encodeURI(this.data.value)
+    if (this.data.optiontype === 'add') {
+      gql.mutate({
+        mutation: `mutation{
+        createtemplate(
+          type:"${this.data.type === 'workcontents' ? 'workcontent' : 'atention'}"
+          value:"${value}"
+        )
+      }`
+      }).then((res) => {
+        console.log('success', res);
+        wx.showToast({
+          title: '添加成功',
+        })
+        setTimeout(() => {
+          wx.navigateBack({
+            delta: 1
+          })
+        }, 1000)
+      }).catch((error) => {
+        console.log('fail', error);
+        wx.showToast({
+          title: '添加失败',
+          icon: 'none'
+        })
+      });
     } else {
-      this.data.list.push({
-        value: this.data.list.length,
-        content: this.data.template
-      })
+      gql.mutate({
+        mutation: `mutation{
+        modifytemplate(
+          id:"${this.data.id}"
+          type:"${this.data.type === 'workcontents' ? 'workcontent' : 'atention'}"
+          value:"${value}"
+        )
+      }`
+      }).then((res) => {
+        console.log('success', res);
+        wx.showToast({
+          title: '修改成功',
+        })
+        setTimeout(() => {
+          wx.navigateBack({
+            delta: 1
+          })
+        }, 1000)
+      }).catch((error) => {
+        console.log('fail', error);
+        wx.showToast({
+          title: '修改失败',
+          icon: 'none'
+        })
+      });
     }
-    wx.setStorage({
-      key: this.data.type,
-      data: this.data.list,
-    })
-    wx.navigateBack({
-      delta: 1
-    })
   }
 
 })

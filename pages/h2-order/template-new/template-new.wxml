@@ -2,7 +2,7 @@
 <view class='page'>
 
   <view class='area'>
-    <textarea placeholder='请输入' focus bindinput='iptTemp' value='{{template}}'></textarea>
+    <textarea placeholder='请输入' focus bindinput='iptTemp' value='{{value}}'></textarea>
   </view>
 
   <view class='btn_box'>

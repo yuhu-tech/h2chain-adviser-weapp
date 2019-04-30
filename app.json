@@ -1,17 +1,18 @@
 {
   "pages": [
     "pages/h2-account/login/login",
+    "pages/h2-order/list-order/list-order",
+    "pages/h2-order/list-order-note/list-order-note",
+    "pages/h2-order/list-order-detail/list-order-detail",
     "pages/h2-account/home/home",
     "pages/h2-account/change-password/change-password",
-    "pages/h2-order/list-order/list-order",
-    "pages/h2-order/list-order-info/list-order-info",
-    "pages/h2-order/list-order-detail/list-order-detail",
-    "pages/h2-order/list-order-QRCode/list-order-QRCode",
-    "pages/h2-order/history-order/history-order",
-    "pages/h2-order/history-order-detail/history-order-detail",
     "pages/h2-order/new-order/new-order",
     "pages/h2-order/template-new/template-new",
     "pages/h2-order/template-order/template-order",
+    "pages/h2-order/list-order-info/list-order-info",
+    "pages/h2-order/list-order-QRCode/list-order-QRCode",
+    "pages/h2-order/history-order/history-order",
+    "pages/h2-order/history-order-detail/history-order-detail",
     "pages/h2-order/prompt-success/prompt-success",
     "pages/h2-order/prompt-close/prompt-close",
     "pages/h2-order/pt-info/pt-info"
@@ -37,5 +38,9 @@
   "networkTimeout": {
     "request": 10000,
     "downloadFile": 10000
-  }
+  },
+  "sitemapLocation": "sitemap.json",
+  "navigateToMiniProgramAppIdList": [
+    "wx0f2ab26c0f65377d"
+  ]
 }

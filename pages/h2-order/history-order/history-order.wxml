@@ -37,8 +37,8 @@
           </view>
           <wux-white-space body-style="height:20rpx" />
           <view class='card_p_bd_count'>
-            <view wx:if="{{item.modifiedorder.length>0?(item.originorder.mode===0):(item.modifiedorder[0].changedmode===0)}}">
-              <text>{{item.countyet||0}}/{{item.modifiedorder[0].changedcount||item.originorder.count||0}}</text>
+              <view wx:if="{{item.modifiedorder.length>0?(item.modifiedorder[0].changedmode===0):(item.originorder.mode===0)}}">
+              <text>人数 {{item.countyet||0}}/{{item.modifiedorder[0].changedcount||item.originorder.count||0}}</text>
             </view>
             <view wx:else>
               <text class='card_count_isSex'>男 {{item.maleyet||0}}/{{item.modifiedorder[0].changedmale||item.originorder.male||0}}</text>

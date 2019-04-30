@@ -45,9 +45,9 @@ Page({
     gql.query({
       query: `query {
         me{
+          name
+          phone
           profile{
-            phone
-            name
             companyname
           }
         }
@@ -55,7 +55,7 @@ Page({
     }).then((res) => {
       console.log('success', res);
       this.setData({
-        qlInfo: res.me.profile
+        qlInfo: res.me
       })
     }).catch((error) => {
       console.log('fail', error);

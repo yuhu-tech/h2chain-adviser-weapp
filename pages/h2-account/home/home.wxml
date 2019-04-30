@@ -17,7 +17,7 @@
         <view class='bd_btm' />
         <wux-cell title="手机" extra='{{qlInfo.phone}}' hover-class="none"></wux-cell>
         <view class='bd_btm' />
-        <wux-cell title="公司名称" extra='{{qlInfo.companyname}}' hover-class="none"></wux-cell>
+        <wux-cell title="公司名称" extra='{{qlInfo.profile.companyname}}' hover-class="none"></wux-cell>
       </wux-cell-group>
     </wux-row>
     <wux-white-space body-style='height:15rpx' />

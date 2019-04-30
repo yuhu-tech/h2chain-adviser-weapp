@@ -15,13 +15,13 @@
       <wux-divider show-text="{{ false }}" />
       <view class='card_share'>
         <view></view>
-        <button open-type='share' data-type='pt'>
+        <button bindtap='jumpToPt'>
           <view class='card_share_item'>
             <image src='/images/bg-pt.png' />
             <text>分享给PT</text>
           </view>
         </button>
-        <button open-type='share' data-type='adviser'>
+        <button bindtap='jumpToAgent'>
           <view class='card_share_item'>
             <image src='/images/bg-adviser.png' />
             <text>分享给顾问</text>

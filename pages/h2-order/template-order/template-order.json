@@ -2,7 +2,10 @@
   "usingComponents": {
     "wux-icon": "wux-weapp/icon",
     "wux-white-space": "wux-weapp/white-space",
-    "wux-button": "wux-weapp/button"
+    "wux-button": "wux-weapp/button",
+    "wux-swipe-action-group": "wux-weapp/swipe-action-group",
+    "wux-swipe-action": "wux-weapp/swipe-action",
+    "toptip": "/components/toptip/toptip"
   },
   "navigationBarTitleText": "选择模板"
 }

@@ -10,8 +10,9 @@ Page({
   data: {
     orderid: 'default',
     order_info: '',
-    pt_list_wait: [{}],
-    pt_list_done: [{}],
+    pt_list: [],
+    pt_list_wait: [],
+    pt_list_ing: [],
     multiArray: [
       ['代理端', 'PT分享', '顾问端分享', '现场扫码', '客户端报名'],
       []
@@ -44,72 +45,9 @@ Page({
   onShow: function() {
     this.setData({
       ['multiArray[1]']: ['张大海', '赵小豪'],
-      agent_list: ['张大海', '赵小豪'],
-      pt_list: ['周淑芬', '王小丽']
+      agent_list: ['张大海', '赵小豪']
     })
-    gql.query({
-      query: `query {
-        search(
-          orderid: "${this.data.orderid}"
-        ) {
-          originorder{
-            orderid
-            occupation
-            datetime
-            duration
-            mode
-            count
-            male
-            female
-          }
-          modifiedorder{
-            changeddatetime
-            changedduration
-            changedmode
-            changedcount
-            changedmale
-            changedfemale
-          }
-          hotel{
-            hotelname
-          }
-          postorder{
-            salary
-            isfloat
-          }
-          countyet
-          maleyet
-          femaleyet
-        }
-      }`
-    }).then((res) => {
-      console.log('success', res);
-      let temp = new Date(res.search[0].originorder.datetime * 1000)
-      let tempdate = `${util.formatTime(temp).slice(0, 10)}`
-      let tempHour = temp.getHours()
-      let tempMinutes = util.formatNumber(temp.getMinutes())
-      let tempTime = `${util.formatNumber(tempHour)}:${tempMinutes}~${util.formatNumber(tempHour + res.search[0].originorder.duration)}:${tempMinutes}`
-      res.search[0].originorder.date = tempdate
-      res.search[0].originorder.time = tempTime
-      if (res.search[0].modifiedorder.length > 0) {
-        let temp = new Date(res.search[0].modifiedorder[0].changeddatetime * 1000)
-        let tempdate = `${util.formatTime(temp).slice(0, 10)}`
-        let tempHour = temp.getHours()
-        let tempMinutes = util.formatNumber(temp.getMinutes())
-        let tempTime = `${util.formatNumber(tempHour)}:${tempMinutes}~${util.formatNumber(tempHour + res.search[0].modifiedorder[0].changedduration)}:${tempMinutes}`
-        res.search[0].modifiedorder[0].date = tempdate
-        res.search[0].modifiedorder[0].time = tempTime
-      }
-      this.setData({
-        order_info: res.search[0]
-      })
-    }).catch((error) => {
-      console.log('fail', error);
-      wx.showToast({
-        title: '获取失败',
-        icon: 'none'
-      })
-    });
+    this.doSearch()
   },
 
   /**
@@ -147,9 +85,101 @@ Page({
 
   },
 
-  doCall: function() {
+  doSearch: function() {
+    gql.query({
+      query: `query {
+        search(
+          orderid: "${this.data.orderid}"
+        ) {
+          originorder{
+            orderid
+            occupation
+            datetime
+            duration
+            mode
+            count
+            male
+            female
+          }
+          modifiedorder{
+            changeddatetime
+            changedduration
+            changedmode
+            changedcount
+            changedmale
+            changedfemale
+          }
+          hotel{
+            hotelname
+          }
+          postorder{
+            salary
+            isfloat
+          }
+          countyet
+          maleyet
+          femaleyet
+          pt{
+            ptid
+            ptorderstate
+            name
+            idnumber
+            gender
+            wechatname
+            phonenumber
+            worktimes
+            remark{
+              startdate
+              enddate
+              realsalary
+            }
+          }
+        }
+      }`
+    }).then((res) => {
+      console.log('success', res);
+      let temp_list = []
+      let temp_ing = []
+      let temp_wait = []
+      util.formatItemOrigin(res.search[0])
+      if (res.search[0].modifiedorder.length > 0) {
+        util.formatItemModify(res.search[0])
+      }
+      if (res.search[0].pt && res.search[0].pt.length > 0) {
+        for (let item of res.search[0].pt) {
+          if (item.ptorderstate === 4) {
+            temp_wait.push(item)
+          } else if (item.ptorderstate === 3) {
+            temp_ing.push(item)
+          } else if (item.ptorderstate === 1) {
+            temp_list.push(item)
+          }
+        }
+      }
+      if (temp_list.length === 0 && temp_ing.length === 0 && temp_wait.length === 0) {
+        wx.showToast({
+          title: '还没有人报名',
+          icon: 'none'
+        })
+      }
+      this.setData({
+        order_info: res.search[0],
+        pt_list: temp_list,
+        pt_list_wait: temp_wait,
+        pt_list_ing: temp_ing
+      })
+    }).catch((error) => {
+      console.log('fail', error);
+      wx.showToast({
+        title: '获取失败',
+        icon: 'none'
+      })
+    })
+  },
+
+  doCall: function(e) {
     wx.makePhoneCall({
-      phoneNumber: '1837264906',
+      phoneNumber: e.currentTarget.dataset.phone
     })
   },
 
@@ -211,27 +241,74 @@ Page({
       content: '继续参加？',
       success: res => {
         if (res.confirm) {
-          wx.showToast({
-            title: '操作成功！',
-            icon: 'success'
+          gql.mutate({
+            mutation: `mutation {
+              modifyptoforder(
+                orderid: "${e.currentTarget.dataset.orderid}"
+                ptstatus: 3
+              )
+            }`
+          }).then(res => {
+            wx.showToast({
+              title: '操作成功'
+            })
+            setTimeout(() => {
+              this.doSearch()
+            }, 1000)
+          }).catch(err => {
+            console.log(err)
+            wx.showToast({
+              title: '操作失败',
+              icon: 'none'
+            })
           })
         }
       }
     })
   },
 
-  doOut: function (e) {
+  doOut: function(e) {
     wx.showModal({
       title: '确认',
       content: '拒绝该PT？',
       success: res => {
         if (res.confirm) {
-          wx.showToast({
-            title: '操作成功！',
-            icon: 'success'
+          gql.mutate({
+            mutation: `mutation {
+              modifyptoforder(
+                orderid: "${this.data.orderid}"
+                ptid:"${e.currentTarget.dataset.ptid}"
+                ptstatus: 2
+              )
+            }`
+          }).then(res => {
+            wx.showToast({
+              title: '操作成功'
+            })
+            setTimeout(() => {
+              if (this.data.date) {
+                this.doSearchDate()
+              } else {
+                this.doSearch()
+              }
+            }, 1000)
+          }).catch(err => {
+            console.log(err)
+            wx.showToast({
+              title: '操作失败',
+              icon: 'none'
+            })
           })
         }
       }
+    })
+  },
+
+  doNote: function(e) {
+    console.log(e)
+    let item = e.currentTarget.dataset.item
+    wx.navigateTo({
+      url: `/pages/h2-order/list-order-note/list-order-note?orderid=${this.data.order_info.originorder.orderid}&ptid=${item.ptid}&salary=${this.data.order_info.postorder.salary}&worked=${item.remark?1:2}`,
     })
   }
 

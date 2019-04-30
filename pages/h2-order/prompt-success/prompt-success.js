@@ -95,11 +95,22 @@ Page({
     })
   },
 
-  test: function() {
-    let order_id = 1
-    wx.navigateBackMiniProgram({
+  jumpToPt: function() {
+    wx.navigateToMiniProgram({
       appId: 'wx0f2ab26c0f65377d',
-      path: `pages/h2-order/list-order-info/list-order-info?order_id=${order_id}`,
+      envVersion: 'trial',
+      path: `/pages/h2-order/share/share?orderid=${this.data.orderid}`,
+      success: res => {
+        console.log(res)
+      }
+    })
+  },
+
+  jumpToAgent: function() {
+    wx.navigateToMiniProgram({
+      appId: 'wx0f2ab26c0f65377d',
+      envVersion: 'trial',
+      path: `/pages/h2-order/share/share?orderid=${this.data.orderid}`,
       success: res => {
         console.log(res)
       }

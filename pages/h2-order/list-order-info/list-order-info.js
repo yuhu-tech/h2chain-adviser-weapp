@@ -82,22 +82,12 @@ Page({
       }`
     }).then((res) => {
       console.log('success', res);
-      let temp = new Date(res.search[0].originorder.datetime * 1000)
-      let tempdate = `${util.formatTime(temp).slice(0, 10)}`
-      let tempHour = temp.getHours()
-      let tempMinutes = util.formatNumber(temp.getMinutes())
-      let tempTime = `${util.formatNumber(tempHour)}:${tempMinutes}~${util.formatNumber(tempHour + res.search[0].originorder.duration)}:${tempMinutes}`
-      res.search[0].originorder.date = tempdate
-      res.search[0].originorder.time = tempTime
+      util.formatItemOrigin(res.search[0])
       if (res.search[0].modifiedorder.length > 0) {
-        let temp = new Date(res.search[0].modifiedorder[0].changeddatetime * 1000)
-        let tempdate = `${util.formatTime(temp).slice(0, 10)}`
-        let tempHour = temp.getHours()
-        let tempMinutes = util.formatNumber(temp.getMinutes())
-        let tempTime = `${util.formatNumber(tempHour)}:${tempMinutes}~${util.formatNumber(tempHour + res.search[0].modifiedorder[0].changedduration)}:${tempMinutes}`
-        res.search[0].modifiedorder[0].date = tempdate
-        res.search[0].modifiedorder[0].time = tempTime
+        util.formatItemModify(res.search[0])
       }
+      res.search[0].postorder.workcontent = decodeURI(res.search[0].postorder.workcontent)
+      res.search[0].postorder.attention = decodeURI(res.search[0].postorder.attention)
       this.setData({
         order: res.search[0]
       })

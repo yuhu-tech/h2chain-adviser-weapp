@@ -1,12 +1,19 @@
 // pages/h2-order/template-order/template-order.js
+var gql = require('../../../utils/graphql.js')
+import {
+  $inToptip
+} from '../../../components/index.js'
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    type: 'content',
-    list: []
+    orderid: 'default',
+    type: 'workcontents',
+    list: [],
+    value: ''
   },
 
   /**
@@ -15,7 +22,8 @@ Page({
   onLoad: function(options) {
     if (options.type) {
       this.setData({
-        type: options.type
+        type: options.type,
+        orderid: options.orderid
       })
     }
   },
@@ -31,21 +39,36 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    wx.getStorage({
-      key: this.data.type,
-      success: res => {
-        this.setData({
-          list: res.data
-        })
-        console.log(this.data.list)
-      },
-      fail: err => {
-        wx.setStorage({
-          key: this.data.type,
-          data: [],
-        })
+    gql.query({
+      query: `query{
+        mytemplate{
+          ${this.data.type}{
+            id
+            ${this.data.type === 'workcontents' ? 'workcontent' : 'attention'}
+          }
+        }
+      }`
+    }).then((res) => {
+      console.log('success', res);
+      if (this.data.type === 'workcontents') {
+        for (let item of res.mytemplate.workcontents) {
+          item.workcontent = decodeURI(item.workcontent)
+        }
+      } else {
+        for (let item of res.mytemplate.attentions) {
+          item.attention = decodeURI(item.attention)
+        }
       }
-    })
+      this.setData({
+        list: this.data.type === 'workcontents' ? res.mytemplate.workcontents : res.mytemplate.attentions
+      })
+    }).catch((error) => {
+      console.log('fail', error);
+      wx.showToast({
+        title: '获取失败',
+        icon: 'none'
+      })
+    });
   },
 
   /**
@@ -84,19 +107,54 @@ Page({
   },
 
   radioChange(e) {
-    wx.setStorage({
-      key: this.data.type === 'content' ? 'idx_content' : 'idx_attention',
-      data: Number(e.detail.value),
+    this.setData({
+      value: e.detail.value
     })
   },
 
   doEdit: function(e) {
     wx.navigateTo({
-      url: `/pages/h2-order/template-new/template-new?type=${this.data.type}&add=${e.currentTarget.dataset.add}`,
+      url: `/pages/h2-order/template-new/template-new?type=${this.data.type}&optiontype=${e.currentTarget.dataset.optiontype}&value=${e.currentTarget.dataset.value}&id=${e.currentTarget.dataset.id}`,
+    })
+  },
+
+  doDelete: function(e) {
+    wx.showModal({
+      title: '提示',
+      content: '确认删除？',
+      success: res => {
+        if (res.confirm) {
+          gql.mutate({
+            mutation: `mutation{
+              deletetemplate(
+                type:"${e.currentTarget.dataset.type}"
+                id:"${e.currentTarget.dataset.id}"
+              )
+            }`
+          }).then((res) => {
+            console.log('success', res);
+            wx.showToast({
+              title: '删除成功'
+            })
+            this.onShow()
+          }).catch((error) => {
+            console.log('fail', error);
+            wx.showToast({
+              title: '删除失败'
+            })
+            this.onShow()
+          });
+        }
+      }
     })
   },
 
   doSubmit: function() {
+    if (!this.data.value) {
+      $inToptip().show('请选择模板')
+      return
+    }
+    wx.setStorageSync(this.data.type, this.data.value)
     wx.navigateBack({
       delta: 1
     })

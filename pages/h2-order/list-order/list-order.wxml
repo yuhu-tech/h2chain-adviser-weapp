@@ -34,7 +34,7 @@
             <text class='blank_female'>女 {{item.originorder.female}}</text>
           </view>
           <view wx:else>
-            <text>人数 {{item.count}}</text>
+            <text>人数 {{item.originorder.count}}</text>
           </view>
         </view>
         <view class='card_ft'>
@@ -67,20 +67,24 @@
               <text class='card_bd_date'>{{item.modifiedorder[0].date||item.originorder.date}}</text>
               <text>{{item.modifiedorder[0].time||item.originorder.time}}</text>
             </view>
-            <view class='r200'>{{item.modifiedorder.length>0?'时间变更':''}}</view>
+            <view class='r200'>
+              <text wx:if="{{item.modifiedorder.length>0&&item.modifiedorder[0].date!==item.originorder.date}}">时间变更</text>
+            </view>
           </view>
           <wux-white-space body-style="height:20rpx" />
           <view class='card_p_bd_count'>
             <view>
-              <view wx:if="{{item.modifiedorder.length>0?(item.originorder.mode===0):(item.modifiedorder[0].changedmode===0)}}">
+              <view wx:if="{{item.modifiedorder.length>0?(item.modifiedorder[0].changedmode===0):(item.originorder.mode===0)}}">
                 <text>人数 {{item.countyet}}/{{item.modifiedorder[0].changedcount||item.originorder.count}}</text>
               </view>
-              <view>
+              <view wx:else>
                 <text class='blank_male'>男 {{item.maleyet}}/{{item.modifiedorder[0].changedmale||item.originorder.male}}</text>
                 <text>女 {{item.femaleyet}}/{{item.modifiedorder[0].changedfemale||item.originorder.female}}</text>
               </view>
             </view>
-            <view class='r200'>{{item.modifiedorder.length>0?'人数变更':''}}</view>
+            <view class='r200'>
+              <text wx:if="{{item.modifiedorder.length>0&&(item.originorder.count!==item.modifiedorder[0].changedcount||item.originorder.male!==item.modifiedorder[0].changedmale||item.originorder.female!==item.modifiedorder[0].changedfemale)}}">人数变更</text>
+            </view>
           </view>
           <wux-white-space body-style="height:20rpx" />
           <view class='card_p_bd_salary'>
@@ -89,10 +93,10 @@
           </view>
         </view>
         <view class='card_p_ft'>
-          <wux-button type='main'>
+          <wux-button type='main' bindtap='jumpToPt' data-orderid='{{item.originorder.orderid}}'>
             <view class='text_btn'>分享给PT</view>
           </wux-button>
-          <wux-button type='main'>
+          <wux-button type='main' bindtap='jumpToAgent' data-orderid='{{item.originorder.orderid}}'>
             <view class='text_btn'>分享给代理</view>
           </wux-button>
           <wux-button type='main' bind:click="goQRCode" data-orderid='{{item.originorder.orderid}}'>

@@ -57,7 +57,7 @@
           <view class='form_item_temp_text n200' wx:if="{{form.workcontent}}">
             <text>{{form.workcontent}}</text>
           </view>
-          <view class='form_item_temp_link b200' bindtap='doChooseTemp' data-type='content'>
+          <view class='form_item_temp_link b200' bindtap='doChooseTemp' data-type='workcontents'>
             <text>选择模板</text>
             <wux-icon type="ios-arrow-round-forward" size='20' />
           </view>
@@ -70,7 +70,7 @@
           <view class='form_item_temp_text n200' wx:if="{{form.attention}}">
             <text>{{form.attention}}</text>
           </view>
-          <view class='form_item_temp_link b200' bindtap='doChooseTemp' data-type='attention'>
+          <view class='form_item_temp_link b200' bindtap='doChooseTemp' data-type='attentions'>
             <text>选择模板</text>
             <wux-icon type="ios-arrow-round-forward" size='20' />
           </view>

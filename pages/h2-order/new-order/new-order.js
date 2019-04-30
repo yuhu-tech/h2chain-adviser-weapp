@@ -31,8 +31,7 @@ Page({
       salary: '',
       workcontent: '请选择工作内容的模板',
       attention: '请选择注意事项的模板'
-    },
-    template: []
+    }
   },
 
   /**
@@ -57,6 +56,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    console.log(1)
+    console.log(this.data.form.count)
     gql.query({
       query: `query{
         search(
@@ -78,20 +79,33 @@ Page({
         }
       }`
     }).then((res) => {
-      let temp = new Date(res.search[0].originorder.datetime * 1000)
-      let tempdate = `${util.formatTime(temp).slice(0, 10)}`
-      let tempHour = temp.getHours()
-      let tempMinutes = util.formatNumber(temp.getMinutes())
-      let tempTime = `${util.formatNumber(tempHour)}:${tempMinutes}~${util.formatNumber(tempHour + res.search[0].originorder.duration)}:${tempMinutes}`
-      res.search[0].originorder.date = tempdate
-      res.search[0].originorder.time = tempTime
-
+      console.log('success', res);
+      util.formatItemOrigin(res.search[0])
+      if (res.search[0].modifiedorder && res.search[0].modifiedorder.length > 0) {
+        util.formatItemModify(res.search[0])
+      }
       this.setData({
         order: res.search[0],
         ['form.count']: res.search[0].originorder.count,
         ['form.male']: res.search[0].originorder.male,
         ['form.female']: res.search[0].originorder.female
       })
+      if (this.data.order.originorder.mode === 0) {
+        if (Number(this.data.form.isFloat) === 1) {
+          this.setData({
+            ['form.count']: Math.ceil(this.data.form.count * 1.05)
+          })
+        }
+      } else {
+        if (Number(this.data.form.isFloat) === 1) {
+          this.setData({
+            ['form.male']: Math.ceil(this.data.form.male * 1.05),
+            ['form.female']: Math.ceil(this.data.form.female * 1.05)
+          })
+        }
+      }
+      console.log(2)
+      console.log(this.data.form.count)
     }).catch((error) => {
       console.log('fail', error);
       wx.showToast({
@@ -99,56 +113,30 @@ Page({
         icon: 'none'
       })
     });
-    /* content */
+    console.log(3)
+    console.log(this.data.form.count)
     wx.getStorage({
-      key: 'content',
+      key: 'workcontents',
       success: res => {
+        console.log(res)
         if (res.data.length > 0) {
-          wx.getStorage({
-            key: 'idx_content',
-            success: idx => {
-              let value = res.data[idx.data].content
-              console.log(value)
-              this.setData({
-                ['form.workcontent']: value
-              })
-            },
-            fail: err => {
-              console.log('get idx of content fail, ' + err)
-            }
+          this.setData({
+            ['form.workcontent']: res.data
           })
-        } else {
-          console.log('content is null')
         }
       },
-      fail: err => {
-        console.log('get content fail, ' + err)
-      }
     })
-    /* attention */
+    console.log(4)
     wx.getStorage({
-      key: 'attention',
+      key: 'attentions',
       success: res => {
+        console.log(res)
         if (res.data.length > 0) {
-          wx.getStorage({
-            key: 'idx_attention',
-            success: idx => {
-              let value = res.data[idx.data].content
-              this.setData({
-                ['form.attention']: value
-              })
-            },
-            fail: err => {
-              console.log('get idx of attention fail, ' + err)
-            }
+          this.setData({
+            ['form.attention']: res.data
           })
-        } else {
-          console.log('attention is null')
         }
       },
-      fail: err => {
-        console.log('get attention fail, ' + err)
-      }
     })
   },
 
@@ -221,20 +209,7 @@ Page({
 
   doChooseTemp: function(e) {
     wx.navigateTo({
-      url: `/pages/h2-order/template-order/template-order?type=${e.currentTarget.dataset.type}&orderid=${this.data.orderid}`,
-    })
-  },
-
-  doAddTemp: function() {
-    this.data.template.push('test')
-    let temp = this.data.template
-    this.setData({
-      template: temp
-    })
-    console.log(this.data.template)
-    wx.setStorage({
-      key: 'template',
-      data: this.data.template,
+      url: `/pages/h2-order/template-order/template-order?type=${e.currentTarget.dataset.type}`,
     })
   },
 
@@ -266,8 +241,8 @@ Page({
             orderid: "${this.data.orderid}"
             isfloat: ${Number(form.isFloat)}
             salary: ${Number(form.salary)}
-            workcontent: "${form.workcontent}"
-            attention: "${form.attention}"
+            workcontent: "${encodeURI(form.workcontent)}"
+            attention: "${encodeURI(form.attention)}"
           }
         ){
           error
@@ -275,7 +250,7 @@ Page({
       }`
     }).then((res) => {
       wx.redirectTo({
-        url: '/pages/h2-order/prompt-success/prompt-success',
+        url: `/pages/h2-order/prompt-success/prompt-success?orderid=${this.data.orderid}`,
       })
     }).catch((error) => {
       console.log(error)

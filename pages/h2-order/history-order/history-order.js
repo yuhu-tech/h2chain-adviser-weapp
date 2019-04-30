@@ -58,10 +58,6 @@ Page({
           state:2
         ){
           state
-          adviser{
-            name
-            companyname
-          }
           originorder{
             orderid
             occupation
@@ -80,6 +76,12 @@ Page({
             changedmale
             changedfemale
           }
+          postorder{
+            salary
+          }
+          hotel{
+            hotelname
+          }
           countyet
           maleyet
           femaleyet
@@ -87,21 +89,9 @@ Page({
       }`
     }).then((res) => {
       for (let item of res.search) {
-        let temp = new Date(item.originorder.datetime * 1000)
-        let tempdate = `${util.formatTime(temp).slice(0, 10)}`
-        let tempHour = temp.getHours()
-        let tempMinutes = util.formatNumber(temp.getMinutes())
-        let tempTime = `${util.formatNumber(tempHour)}:${tempMinutes}~${util.formatNumber(tempHour + item.originorder.duration)}:${tempMinutes}`
-        item.originorder.date = tempdate
-        item.originorder.time = tempTime
+        util.formatItemOrigin(item)
         if (item.modifiedorder.length > 0) {
-          let temp = new Date(item.modifiedorder[0].changeddatetime * 1000)
-          let tempdate = `${util.formatTime(temp).slice(0, 10)}`
-          let tempHour = temp.getHours()
-          let tempMinutes = util.formatNumber(temp.getMinutes())
-          let tempTime = `${util.formatNumber(tempHour)}:${tempMinutes}~${util.formatNumber(tempHour + item.modifiedorder[0].changedduration)}:${tempMinutes}`
-          item.modifiedorder[0].date = tempdate
-          item.modifiedorder[0].time = tempTime
+          util.formatItemModify(item)
         }
       }
       console.log('success', res);
@@ -164,10 +154,6 @@ Page({
           state:2
         ){
           state
-          adviser{
-            name
-            companyname
-          }
           originorder{
             orderid
             occupation
@@ -186,6 +172,12 @@ Page({
             changedmale
             changedfemale
           }
+          postorder{
+            salary
+          }
+          hotel{
+            hotelname
+          }
           countyet
           maleyet
           femaleyet
@@ -193,21 +185,9 @@ Page({
       }`
     }).then((res) => {
       for (let item of res.search) {
-        let temp = new Date(item.originorder.datetime * 1000)
-        let tempdate = `${util.formatTime(temp).slice(0, 10)}`
-        let tempHour = temp.getHours()
-        let tempMinutes = util.formatNumber(temp.getMinutes())
-        let tempTime = `${util.formatNumber(tempHour)}:${tempMinutes}~${util.formatNumber(tempHour + item.originorder.duration)}:${tempMinutes}`
-        item.originorder.date = tempdate
-        item.originorder.time = tempTime
+        util.formatItemOrigin(item)
         if (item.modifiedorder.length > 0) {
-          let temp = new Date(item.modifiedorder[0].changeddatetime * 1000)
-          let tempdate = `${util.formatTime(temp).slice(0, 10)}`
-          let tempHour = temp.getHours()
-          let tempMinutes = util.formatNumber(temp.getMinutes())
-          let tempTime = `${util.formatNumber(tempHour)}:${tempMinutes}~${util.formatNumber(tempHour + item.modifiedorder[0].changedduration)}:${tempMinutes}`
-          item.modifiedorder[0].date = tempdate
-          item.modifiedorder[0].time = tempTime
+          util.formatItemModify(item)
         }
       }
       console.log('success', res);

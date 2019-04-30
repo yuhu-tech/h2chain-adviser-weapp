@@ -37,9 +37,15 @@ Page({
         selected: 0
       })
     }
+    if (this.data.date) {
+      this.bindDateChange()
+      return
+    }
     gql.query({
       query: `query{
-        search{
+        search(
+          state:11
+        ){
           state
           originorder{
             orderid
@@ -71,29 +77,21 @@ Page({
         }
       }`
     }).then((res) => {
+      console.log('success', res);
       let tempWait = []
       let tempIng = []
-
-      console.log('success', res);
+      if (res.search.length === 0) {
+        wx.showToast({
+          title: '暂无订单',
+          icon: 'none'
+        })
+        return
+      }
       for (let item of res.search) {
-        let temp = new Date(item.originorder.datetime * 1000)
-        let tempdate = `${util.formatTime(temp).slice(0, 10)}`
-        let tempHour = temp.getHours()
-        let tempMinutes = util.formatNumber(temp.getMinutes())
-        let tempTime = `${util.formatNumber(tempHour)}:${tempMinutes}~${util.formatNumber(tempHour + item.originorder.duration)}:${tempMinutes}`
-        item.originorder.date = tempdate
-        item.originorder.time = tempTime
-
+        util.formatItemOrigin(item)
         if (item.modifiedorder.length > 0) {
-          let temp = new Date(item.modifiedorder[0].changeddatetime * 1000)
-          let tempdate = `${util.formatTime(temp).slice(0, 10)}`
-          let tempHour = temp.getHours()
-          let tempMinutes = util.formatNumber(temp.getMinutes())
-          let tempTime = `${util.formatNumber(tempHour)}:${tempMinutes}~${util.formatNumber(tempHour + item.modifiedorder[0].changedduration)}:${tempMinutes}`
-          item.modifiedorder[0].date = tempdate
-          item.modifiedorder[0].time = tempTime
+          util.formatItemModify(item)
         }
-
         if (item.state === 0) {
           tempWait.push(item)
         } else {
@@ -149,20 +147,19 @@ Page({
   },
 
   bindDateChange(e) {
-    this.setData({
-      date: e.detail.value
-    })
+    if (e) {
+      this.setData({
+        date: e.detail.value
+      })
+    }
     let timeStamp = new Date(`${this.data.date}T00:00:00`).getTime() / 1000
     gql.query({
       query: `query{
         search(
+          state:11
           datetime:${Number(timeStamp)}
         ){
           state
-          adviser{
-            name
-            companyname
-          }
           originorder{
             orderid
             occupation
@@ -181,31 +178,32 @@ Page({
             changedmale
             changedfemale
           }
+          postorder{
+            salary
+          }
+          hotel{
+            hotelname
+          }
           countyet
           maleyet
           femaleyet
         }
       }`
     }).then((res) => {
+      console.log('success', res);
+      let tempWait = []
+      let tempIng = []
       for (let item of res.search) {
-        let temp = new Date(item.originorder.datetime * 1000)
-        let tempdate = `${util.formatTime(temp).slice(0, 10)}`
-        let tempHour = temp.getHours()
-        let tempMinutes = util.formatNumber(temp.getMinutes())
-        let tempTime = `${util.formatNumber(tempHour)}:${tempMinutes}~${util.formatNumber(tempHour + item.originorder.duration)}:${tempMinutes}`
-        item.originorder.date = tempdate
-        item.originorder.time = tempTime
+        util.formatItemOrigin(item)
         if (item.modifiedorder.length > 0) {
-          let temp = new Date(item.modifiedorder[0].changeddatetime * 1000)
-          let tempdate = `${util.formatTime(temp).slice(0, 10)}`
-          let tempHour = temp.getHours()
-          let tempMinutes = util.formatNumber(temp.getMinutes())
-          let tempTime = `${util.formatNumber(tempHour)}:${tempMinutes}~${util.formatNumber(tempHour + item.modifiedorder[0].changedduration)}:${tempMinutes}`
-          item.modifiedorder[0].date = tempdate
-          item.modifiedorder[0].time = tempTime
+          util.formatItemModify(item)
+        }
+        if (item.state === 0) {
+          tempWait.push(item)
+        } else {
+          tempIng.push(item)
         }
       }
-      console.log('success', res);
       this.setData({
         order_list_wait: tempWait,
         order_list_ing: tempIng
@@ -219,9 +217,9 @@ Page({
     });
   },
 
-  goNewOrder: function() {
+  goNewOrder: function(e) {
     wx.navigateTo({
-      url: '/pages/h2-order/new-order/new-order',
+      url: `/pages/h2-order/new-order/new-order?orderid=${e.currentTarget.dataset.orderid}`,
     })
   },
 
@@ -239,7 +237,30 @@ Page({
 
   goQRCode: function(e) {
     wx.navigateTo({
-      url: `/pages/h2-order/list-order-QRCode/list-order-QRCode?orderid=${e.currentTarget.dataset.orderid}`,
+      url: `/pages/h2-order/list-order-QRCode/list-order-QRCode?adviser=adviser&orderid=${e.currentTarget.dataset.orderid}`,
+    })
+  },
+
+  jumpToPt: function(e) {
+    console.log(e)
+    wx.navigateToMiniProgram({
+      appId: 'wx0f2ab26c0f65377d',
+      envVersion: 'trial',
+      path: `/pages/h2-account/auth/auth?adviser=adviser&orderid=${e.currentTarget.dataset.orderid}`,
+      success: res => {
+        console.log(res)
+      }
+    })
+  },
+
+  jumpToAgent: function(e) {
+    wx.navigateToMiniProgram({
+      appId: 'wx0f2ab26c0f65377d',
+      envVersion: 'trial',
+      path: `/pages/h2-account/auth/auth?orderid=${e.currentTarget.dataset.orderid}`,
+      success: res => {
+        console.log(res)
+      }
     })
   }
 

@@ -1,0 +1,57 @@
+<!--pages/h2-order/list-order-note/list-order-note.wxml-->
+<view class='page'>
+  <view class='form'>
+    <view class='item'>
+      <label>开始日期</label>
+      <picker mode="date" value="{{startDate}}" bindchange="doStartDate">
+        <view class='picker'>
+          <text class="{{startDate?'':'n200'}}">{{startDate||'请选择'}}</text>
+          <wux-icon class='n200' type="ios-arrow-forward" size='15' />
+        </view>
+      </picker>
+    </view>
+    <view class='item'>
+      <label>开始时间</label>
+      <picker mode="time" value="{{startTime}}" bindchange="doStartTime">
+        <view class='picker'>
+          <text class="{{startTime?'':'n200'}}">{{startTime||'请选择'}}</text>
+          <wux-icon class='n200' type="ios-arrow-forward" size='15' />
+        </view>
+      </picker>
+    </view>
+    <view class='item'>
+      <label>结束日期</label>
+      <picker mode="date" value="{{endDate}}" bindchange="doEndDate">
+        <view class='picker'>
+          <text class="{{endDate?'':'n200'}}">{{endDate||'请选择'}}</text>
+          <wux-icon class='n200' type="ios-arrow-forward" size='15' />
+        </view>
+      </picker>
+    </view>
+    <view class='item'>
+      <label>结束时间</label>
+      <picker mode="time" value="{{endTime}}" bindchange="doEndTime">
+        <view class='picker'>
+          <text class="{{endTime?'':'n200'}}">{{endTime||'请选择'}}</text>
+          <wux-icon class='n200' type="ios-arrow-forward" size='15' />
+        </view>
+      </picker>
+    </view>
+    <view class='item'>
+      <label>实发薪酬</label>
+      <view class='input'>
+        <input placeholder='请输入' type='number' value='{{realPay}}' bindinput='doRealPay'></input>
+        <text class='n200'>元</text>
+        <text class='tip r200'>20 元/小时</text>
+      </view>
+    </view>
+  </view>
+  <view class='btn'>
+    <wux-button type='main' outline bind:click="doAbsence">
+      <view class='text_btn'>未参加工作</view>
+    </wux-button>
+    <wux-button type='main' bind:click="doSave">
+      <view class='text_btn'>保存</view>
+    </wux-button>
+  </view>
+</view>

@@ -123,7 +123,7 @@ Page({
       $inToptip().show('两次输入的新密码不一致')
       return
     }
-    
+
     gql.mutate({
       mutation: `mutation {
         changepassword(
@@ -146,10 +146,17 @@ Page({
       }, 1000)
     }).catch((error) => {
       console.log('fail', error);
-      wx.showToast({
-        title: '修改失败',
-        icon: 'none'
-      })
+      if (error.errors[0].message === 'Invalid Password') {
+        wx.showToast({
+          title: '旧密码不正确',
+          icon: 'none'
+        })
+      } else {
+        wx.showToast({
+          title: '修改失败',
+          icon: 'none'
+        })
+      }
     });
   },
 

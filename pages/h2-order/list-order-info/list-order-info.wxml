@@ -80,10 +80,14 @@
 
       <wux-divider show-text="{{ false }}" />
       <view class='hotel_info'>工作要求</view>
-      <view class='hotel-info_item n200'>1.{{order.postorder.attention}}</view>
+      <view class='hotel-info_item n200'>
+        <text>{{order.postorder.attention}}</text>
+      </view>
       <wux-white-space body-style='height:30rpx' />
       <view class='hotel_info'>工作简介</view>
-      <view class='hotel-info_item n200'>1.{{order.postorder.workcontent}}</view>
+      <view class='hotel-info_item n200'>
+        <text>{{order.postorder.workcontent}}</text>
+      </view>
 
       <wux-divider show-text="{{ false }}" />
       <view class='hotel_info'>酒店简介</view>

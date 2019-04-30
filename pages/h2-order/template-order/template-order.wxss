@@ -19,7 +19,7 @@
 }
 
 .radio_content {
-  width: 500rpx;
+  width: 400rpx;
   padding: 0 30rpx;
   box-sizing: border-box;
   overflow: hidden;

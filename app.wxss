@@ -5,6 +5,7 @@ page {
   box-sizing: border-box;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 30rpx;
+  word-wrap: break-word;
 }
 
 .y200 {
