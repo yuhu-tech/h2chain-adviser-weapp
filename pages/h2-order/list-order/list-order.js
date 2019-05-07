@@ -129,7 +129,77 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-
+    wx.showNavigationBarLoading();
+    gql.query({
+      query: `query{
+        search(
+          state:11
+        ){
+          state
+          originorder{
+            orderid
+            occupation
+            datetime
+            duration
+            mode
+            count
+            male
+            female
+          }
+          modifiedorder{
+            changeddatetime
+            changedduration
+            changedmode
+            changedcount
+            changedmale
+            changedfemale
+          }
+          postorder{
+            salary
+          }
+          hotel{
+            hotelname
+          }
+          countyet
+          maleyet
+          femaleyet
+        }
+      }`
+    }).then((res) => {
+      console.log('success', res);
+      let tempWait = []
+      let tempIng = []
+      if (res.search.length === 0) {
+        wx.showToast({
+          title: '暂无订单',
+          icon: 'none'
+        })
+        return
+      }
+      for (let item of res.search) {
+        util.formatItemOrigin(item)
+        if (item.modifiedorder.length > 0) {
+          util.formatItemModify(item)
+        }
+        if (item.state === 0) {
+          tempWait.push(item)
+        } else {
+          tempIng.push(item)
+        }
+      }
+      this.setData({
+        order_list_wait: tempWait,
+        order_list_ing: tempIng
+      })
+      wx.hideNavigationBarLoading();
+      wx.stopPullDownRefresh();
+    }).catch((error) => {
+      console.log('fail', error);
+      wx.showToast({
+        title: '获取失败',
+        icon: 'none'
+      })
+    });
   },
 
   /**
