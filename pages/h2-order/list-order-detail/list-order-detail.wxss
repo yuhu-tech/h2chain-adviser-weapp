@@ -229,6 +229,10 @@ input {
   width: 30rpx;
 }
 
+.blank-l {
+  margin-left: 30rpx;
+}
+
 /* modified */
 
 .modified {

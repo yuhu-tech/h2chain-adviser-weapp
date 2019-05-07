@@ -219,11 +219,11 @@ Page({
       $inToptip().show('请输入用工单价')
       return
     }
-    if (!form.workcontent) {
+    if (form.workcontent === '请选择工作内容的模板') {
       $inToptip().show('请选择工作内容')
       return
     }
-    if (!form.attention) {
+    if (form.attention === '请选择注意事项的模板') {
       $inToptip().show('请选择注意事项')
       return
     }

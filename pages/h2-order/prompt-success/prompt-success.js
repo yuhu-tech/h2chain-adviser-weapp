@@ -13,9 +13,9 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function() {
-    wx.showShareMenu({
-      withShareTicket: true
+  onLoad: function(options) {
+    this.setData({
+      orderid: options.orderid
     })
   },
 
@@ -99,7 +99,7 @@ Page({
     wx.navigateToMiniProgram({
       appId: 'wx0f2ab26c0f65377d',
       envVersion: 'trial',
-      path: `/pages/h2-order/share/share?orderid=${this.data.orderid}`,
+      path: `/pages/h2-account/auth/auth?adviser=adviser&orderid=${this.data.orderid}`,
       success: res => {
         console.log(res)
       }

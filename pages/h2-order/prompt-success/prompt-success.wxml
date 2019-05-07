@@ -24,7 +24,7 @@
         <button bindtap='jumpToAgent'>
           <view class='card_share_item'>
             <image src='/images/bg-adviser.png' />
-            <text>分享给顾问</text>
+            <text>分享给代理</text>
           </view>
         </button>
         <view></view>

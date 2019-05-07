@@ -13,14 +13,14 @@
           <view class='top_card_cen'>
             <view>
               <text>{{order_info.originorder.date}}</text>
-              <text class='blank'>{{order_info.originorder.time}}</text>
+              <text class='blank-l'>{{order_info.originorder.time}}</text>
             </view>
             <view wx:if="{{order_info.originorder.mode===0}}">
               <text>{{order_info.countyet}}/{{order_info.originorder.count}}</text>
             </view>
             <view wx:else>
               <text>{{order_info.maleyet}}/{{order_info.originorder.male}} 男</text>
-              <text class='blank'>{{order_info.femaleyet}}/{{order_info.originorder.female}} 女</text>
+              <text class='blank-l'>{{order_info.femaleyet}}/{{order_info.originorder.female}} 女</text>
             </view>
             <view class='top_card_cen_bd' />
           </view>
@@ -30,14 +30,14 @@
         <view class='top_card_cen'>
           <view>
             <text>{{order_info.modifiedorder[0].date||order_info.originorder.date}}</text>
-            <text class='blank'>{{order_info.modifiedorder[0].time||order_info.originorder.time}}</text>
+            <text class='blank-l'>{{order_info.modifiedorder[0].time||order_info.originorder.time}}</text>
           </view>
           <view wx:if="{{order_info.modifiedorder.length>0?(order_info.modifiedorder[0].changedmode===0):(order_info.originorder.mode===0)}}">
             <text>{{order_info.countyet}}/{{order_info.modifiedorder[0].changedcount||order_info.originorder.count}}</text>
           </view>
           <view wx:else>
             <text>{{order_info.maleyet}}/{{order_info.modifiedorder[0].changedmale||order_info.originorder.male}} 男</text>
-            <text class='blank'>{{order_info.femaleyet}}/{{order_info.modifiedorder[0].changedfemale||order_info.originorder.female}} 女</text>
+            <text class='blank-l'>{{order_info.femaleyet}}/{{order_info.modifiedorder[0].changedfemale||order_info.originorder.female}} 女</text>
           </view>
         </view>
 
@@ -62,7 +62,7 @@
           </picker>
         </view>
         <view class='search n200'>
-          <input confirm-type='search' placeholder='输入姓名昵称' placeholder-class='search_p' bindconfirm='search' />
+          <input confirm-type='search' placeholder='输入姓名昵称' placeholder-class='search_p' bindconfirm='doSearchName' bindinput='doSearchName' />
         </view>
       </view>
     </wux-row>
@@ -79,7 +79,7 @@
                 <image class='list_card_avatar' src='/images/order-avatar.png' />
                 <view>
                   <view class='list_card_l_top'>
-                    <text class='list_card_l_top_name'>姓名</text>
+                    <text class='list_card_l_top_name'>{{item.name}}</text>
                     <view class='list_card_l_top_name_phone' bindtap='doCall'>
                       <image src='/images/order-phone.png'></image>
                       <text class='b200'>立刻联系</text>
@@ -87,9 +87,9 @@
                   </view>
                   <wux-white-space body-style="height:10rpx" />
                   <view class='list_card_l_btm text_min n200'>
-                    <text>女</text>
-                    <text class='list_card_l_btm_age'>24岁</text>
-                    <text>这里显示微信昵称</text>
+                    <text>{{item.gender===1?'男':'女'}}</text>
+                    <text class='list_card_l_btm_age'><!-- {{item.age}} --></text>
+                    <text><!-- {{item.wechatname}} --></text>
                   </view>
                 </view>
               </view>
@@ -101,8 +101,8 @@
             </view>
             <view class='list_card_btm'>
               <view class='list_card_btm_top'>
-                <text>工作次数：4次</text>
-                <text>用户端报名</text>
+                <text>工作次数：{{item.worktimes}}次</text>
+                <!-- <text>用户端报名</text> -->
               </view>
               <wux-white-space body-style="height:20rpx" />
               <view class='list_card_btm_btm_btn'>
@@ -110,11 +110,11 @@
                   <view class='text_btn'>用工备注</view>
                 </wux-button>
                 <view class='blank' />
-                <wux-button type='main' outline bind:click="doOut">
+                <wux-button type='main' outline bind:click="doOut" data-ptid='{{item.ptid}}'>
                   <view class='text_btn'>拒绝</view>
                 </wux-button>
                 <view class='blank' />
-                <wux-button type='main' bind:click="doIn">
+                <wux-button type='main' bind:click="doIn" data-ptid='{{item.ptid}}'>
                   <view class='text_btn'>继续参加</view>
                 </wux-button>
               </view>
@@ -124,10 +124,10 @@
       </wux-row>
     </block>
 
-    <view class='divider_n' wx:if="{{pt_list_done.length>0}}">
-      <wux-divider position="right" text="已报名" />
+    <view class='divider_n' wx:if="{{pt_list_ing.length>0}}">
+      <wux-divider position="right" text="已确认" />
     </view>
-    <block wx:for="{{pt_list_done}}" wx:key="">
+    <block wx:for="{{pt_list_ing}}" wx:key="">
       <wux-row>
         <view class='list'>
           <view class='list_card'>
@@ -136,7 +136,7 @@
                 <image class='list_card_avatar' src='/images/order-avatar.png' />
                 <view>
                   <view class='list_card_l_top'>
-                    <text class='list_card_l_top_name'>姓名</text>
+                    <text class='list_card_l_top_name'>{{item.name}}</text>
                     <view class='list_card_l_top_name_phone' bindtap='doCall'>
                       <image src='/images/order-phone.png'></image>
                       <text class='b200'>立刻联系</text>
@@ -144,9 +144,9 @@
                   </view>
                   <wux-white-space body-style="height:10rpx" />
                   <view class='list_card_l_btm text_min n200'>
-                    <text>女</text>
-                    <text class='list_card_l_btm_age'>24岁</text>
-                    <text>这里显示微信昵称</text>
+                    <text>{{item.gender===1?'男':'女'}}</text>
+                    <text class='list_card_l_btm_age'><!-- {{item.age}} --></text>
+                    <text><!-- {{item.wechatname}} --></text>
                   </view>
                 </view>
               </view>
@@ -158,8 +158,8 @@
             </view>
             <view class='list_card_btm'>
               <view class='list_card_btm_top'>
-                <text>工作次数：4次</text>
-                <text>用户端报名</text>
+                <text>工作次数：{{item.worktimes}}次</text>
+                <!-- <text>用户端报名</text> -->
               </view>
               <wux-white-space body-style="height:20rpx" />
               <view class='list_card_btm_btm_btn'>
@@ -167,7 +167,7 @@
                   <view class='text_btn'>用工备注</view>
                 </wux-button>
                 <view class='blank' />
-                <wux-button type='main' outline bind:click="doOut">
+                <wux-button type='main' outline bind:click="doOut" data-ptid='{{item.ptid}}'>
                   <view class='text_btn'>拒绝</view>
                 </wux-button>
               </view>
@@ -178,10 +178,12 @@
       </wux-row>
     </block>
 
+    <view class='divider_n' wx:if="{{pt_list.length>0}}">
+      <wux-divider position="right" text="已报名" />
+    </view>
     <block wx:for="{{pt_list}}" wx:key="">
       <wux-row>
         <view class='list'>
-          <wux-white-space body-style="height:30rpx" />
           <view class='list_card'>
             <view class='list_card_top'>
               <view class='list_card_l'>
@@ -211,7 +213,7 @@
             <view class='list_card_btm'>
               <view class='list_card_btm_top'>
                 <text>工作次数：{{item.worktimes}}次</text>
-                <text>用户端报名</text>
+                <!-- <text>用户端报名</text> -->
               </view>
               <wux-white-space body-style="height:20rpx" />
               <view class='list_card_btm_btm_btn'>

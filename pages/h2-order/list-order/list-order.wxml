@@ -22,7 +22,7 @@
         <view class='card_hd'>
           <image src='/images/order-avatar.png' />
           <view class='card_hd_job'>{{item.originorder.occupation}}</view>
-          <view class='n200'>{{item.originorder.companyname}}</view>
+          <view class='n200'>{{item.hotel.hotelname}}</view>
         </view>
         <view class='card_bd n200'>
           <view>
@@ -100,7 +100,7 @@
             <view class='text_btn'>分享给代理</view>
           </wux-button>
           <wux-button type='main' bind:click="goQRCode" data-orderid='{{item.originorder.orderid}}'>
-            <view class='text_btn'>扫码报名</view>
+            <view class='text_btn'>现场报名</view>
           </wux-button>
         </view>
       </view>
