@@ -7,33 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    pt_info: {
-      avatar: '/images/order-avatar.png',
-      name: '周海燕',
-      gender: '女',
-      nickName: '这里显示微信昵称',
-      age: 24,
-      weight: 53,
-      height: 165
-    },
-    job_count: 22,
-    job_hour: 4,
-    latest: [{
-      job: '保洁员',
-      hotel_name: '希尔顿酒店'
-    }, {
-      job: '保洁员',
-      hotel_name: '希尔顿酒店'
-    }, {
-      job: '保洁员',
-      hotel_name: '希尔顿酒店'
-    }, {
-      job: '保洁员',
-      hotel_name: '希尔顿酒店'
-    }, {
-      job: '保洁员',
-      hotel_name: '希尔顿酒店'
-    }, ]
+    pt_info: '',
+    list: ''
   },
 
   /**
@@ -54,33 +29,39 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    /* gql.query({
-          query: `query {
-            order_detail(
-              pt_id: "${param}"
-            ) {
-              pt_info {
-                avatar,
-                name,
-                gender,
-                nickName,
-                age,
-                weight,
-                height
-              }
-              job_count,
-              job_hour,
-              latest {
-                job,
-                hotel_name
-              }
-            }
-          }`
-        }).then((res) => {
-          console.log('success', res);
-        }).catch((error) => {
-          console.log('fail', error);
-        }); */
+    try {
+      const value = wx.getStorageSync('pt_info')
+      if (value) {
+        this.setData({
+          pt_info: value
+        })
+      }
+    } catch (e) {
+      console.log(e)
+      wx.showToast({
+        title: '获取信息失败',
+        icon: 'none'
+      })
+    }
+    gql.query({
+      query: `query {
+        searchhistory(
+          ptid: "${this.data.pt_info.ptid}}"
+        ) {
+          occupation
+          hotelname
+        }
+      }`
+    }).then((res) => {
+      console.log('success', res);
+      if (res.searchhistory.length > 0) {
+        this.setData({
+          list: res.searchhistory
+        })
+      }
+    }).catch((error) => {
+      console.log('fail', error);
+    });
   },
 
   /**
@@ -118,9 +99,9 @@ Page({
 
   },
 
-  doCall: function() {
+  doCall: function(e) {
     wx.makePhoneCall({
-      phoneNumber: '111111111',
+      phoneNumber: e.currentTarget.dataset.number,
     })
   }
 

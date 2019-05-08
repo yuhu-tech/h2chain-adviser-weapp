@@ -37,7 +37,7 @@
           </view>
           <wux-white-space body-style="height:20rpx" />
           <view class='card_p_bd_count'>
-              <view wx:if="{{item.modifiedorder.length>0?(item.modifiedorder[0].changedmode===0):(item.originorder.mode===0)}}">
+            <view wx:if="{{item.modifiedorder.length>0?(item.modifiedorder[0].changedmode===0):(item.originorder.mode===0)}}">
               <text>人数 {{item.countyet||0}}/{{item.modifiedorder[0].changedcount||item.originorder.count||0}}</text>
             </view>
             <view wx:else>
@@ -47,8 +47,8 @@
           </view>
           <wux-white-space body-style="height:20rpx" />
           <view class='card_p_bd_salary'>
-            <text>50元/小时</text>
-            <text class='n200'>希尔顿酒店</text>
+            <text>{{item.postorder.salary}}元/小时</text>
+            <text class='n200'>{{item.hotel.hotelname}}</text>
           </view>
         </view>
 

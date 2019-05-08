@@ -9,7 +9,7 @@ Page({
    */
   data: {
     orderid: 'default',
-    value: 'https://www.bilibili.com/'
+    url: ''
   },
 
   /**
@@ -34,6 +34,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    this.getQRCode()
     gql.query({
       query: `query {
         search(
@@ -75,7 +76,8 @@ Page({
         util.formatItemModify(res.search[0])
       }
       this.setData({
-        order_info: res.search[0]
+        order_info: res.search[0],
+        url: `https://h2chain.yuhu.tech/miniprogram/pt?orderid=${this.data.orderid}`
       })
     }).catch((error) => {
       console.log('fail', error);

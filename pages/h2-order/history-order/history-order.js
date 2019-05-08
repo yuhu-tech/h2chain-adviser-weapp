@@ -9,29 +9,7 @@ Page({
    */
   data: {
     date: '',
-    order_list: [{
-      job: '服务员',
-      hotel_name: '希尔顿酒店',
-      date: '2019-12-29',
-      time: '10:00～14:00',
-      isSex: false,
-      count_male: 10,
-      count_male_yet: 5,
-      count_female: 10,
-      count_female_yet: 5,
-      salary: 20
-    }, {
-      job: '服务员',
-      hotel_name: '希尔顿酒店',
-      date: '2019-12-29',
-      time: '10:00～14:00',
-      isSex: true,
-      count_male: 10,
-      count_male_yet: 5,
-      count_female: 10,
-      count_female_yet: 5,
-      salary: 20
-    }]
+    order_list: []
   },
 
   /**
@@ -52,6 +30,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    wx.showToast({
+      title: '获取中',
+      icon: 'loading'
+    })
     gql.query({
       query: `query{
         search(
@@ -98,6 +80,7 @@ Page({
       this.setData({
         order_list: res.search
       })
+      wx.hideToast()
     }).catch((error) => {
       console.log('fail', error);
       wx.showToast({
@@ -126,6 +109,9 @@ Page({
    */
   onPullDownRefresh: function() {
     wx.showNavigationBarLoading();
+    this.setData({
+      date: ''
+    })
     gql.query({
       query: `query{
         search(

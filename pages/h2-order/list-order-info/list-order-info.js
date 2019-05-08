@@ -8,7 +8,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    cover: ['https://pix6.agoda.net/agaff/aff.bstatic.com/images/hotel/max1024x768/106/106460799.jpg', 'https://pix6.agoda.net/agaff/aff.bstatic.com/images/hotel/max1024x768/111/111907305.jpg', 'https://pix6.agoda.net/agaff/aff.bstatic.com/images/hotel/max1024x768/111/111604695.jpg'],
     orderid: 'default',
     order: ''
   },
@@ -74,6 +73,7 @@ Page({
             hoteladdress
             hotelphone
             hotelintroduction
+            cover
           }
           countyet
           maleyet

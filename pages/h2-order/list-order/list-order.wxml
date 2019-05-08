@@ -14,6 +14,7 @@
       </picker>
     </wux-row>
 
+    <!-- 待发布 -->
     <block wx:for="{{order_list_wait}}" wx:key="">
       <view class='divider_r'>
         <wux-divider position="right" text="待确认" wx:if="{{index===0}}" />
@@ -46,6 +47,7 @@
       <wux-white-space body-style="height:30rpx" wx:if="{{index!=order_list_wait.length-1}}" />
     </block>
 
+    <!-- 已发布 -->
     <block wx:for="{{order_list_ing}}" wx:key="">
       <view class='divider_n'>
         <wux-divider position="right" text="招募中" wx:if="{{index===0}}" />
@@ -68,7 +70,7 @@
               <text>{{item.modifiedorder[0].time||item.originorder.time}}</text>
             </view>
             <view class='r200'>
-              <text wx:if="{{item.modifiedorder.length>0&&item.modifiedorder[0].date!==item.originorder.date}}">时间变更</text>
+              <text wx:if="{{item.modifiedorder.length>0&&item.modifiedorder[0].time!==item.originorder.time}}">时间变更</text>
             </view>
           </view>
           <wux-white-space body-style="height:20rpx" />

@@ -208,3 +208,7 @@ input {
 .modified {
   color: #c8c8c8;
 }
+
+.none_tip {
+  text-align: center;
+}

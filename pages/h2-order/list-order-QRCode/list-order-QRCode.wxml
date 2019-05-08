@@ -29,7 +29,7 @@
     </view>
     <view class='card_btm'>
       <wux-white-space body-style="height:80rpx" />
-      <wux-qrcode id="qrcode" wux-class="qrcode" data="{{value}}" width="200" height="200" bind:click="previewImage" />
+      <wux-qrcode id="qrcode" wux-class="qrcode" data="{{url}}" width="200" height="200" bind:click="previewImage" />
       <wux-white-space body-style="height:40rpx" />
       <text>邀请PT扫描二维码报名</text>
     </view>

@@ -1,5 +1,6 @@
 // pages/h2-order/list-order-note/list-order-note.js
 var gql = require('../../../utils/graphql.js')
+var util = require('../../../utils/util.js')
 
 Page({
 
@@ -35,23 +36,20 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    if (Number(this.data.options.worked) === 1) {
-      gql.query({
-        query: `query{
-          searchremark(
-            orderid:"${this.data.options.orderid}"
-            ptid:"${this.data.options.ptid}"
-          ){
-            startDate
-            endDate
-            realSalary
-          }
-      }`
-      }).then(res => {
-        console.log('success', res)
-        /* ... */
-      }).catch(err => {
-        console.log('fail', err)
+    let remark = wx.getStorageSync('remark')
+    if (remark) {
+      let start = new Date(remark.startdate * 1000)
+      let end = new Date(remark.enddate * 1000)
+      let startDate = `${start.getFullYear()}-${util.formatNumber(start.getMonth())}-${util.formatNumber(start.getDay())}`
+      let startTime = `${util.formatNumber(start.getHours())}:${util.formatNumber(start.getMinutes())}`
+      let endDate = `${end.getFullYear()}-${util.formatNumber(end.getMonth())}-${util.formatNumber(end.getDay())}`
+      let endTime = `${util.formatNumber(end.getHours())}:${util.formatNumber(end.getMinutes())}`
+      this.setData({
+        startDate: startDate,
+        startTime: startTime,
+        endDate: endDate,
+        endTime: endTime,
+        realPay: remark.realsalary
       })
     }
   },
@@ -129,15 +127,22 @@ Page({
         editremark(
           orderid:"${this.data.options.orderid}"
           ptid:"${this.data.options.ptid}"
-          isWorked:2
-        ){
-          error
-        }
+          startdate:0
+          enddate:0
+          isworked:2
+        )
       }`
     }).then((res) => {
       console.log('success', res);
+      wx.showToast({
+        title: '操作成功',
+      })
     }).catch((error) => {
       console.log('fail', error);
+      wx.showToast({
+        title: '操作失败',
+        icon: 'none'
+      })
     });
   },
 
@@ -158,8 +163,20 @@ Page({
       }`
     }).then((res) => {
       console.log('success', res);
+      wx.showToast({
+        title: '操作成功',
+      })
+      setTimeout(() => {
+        wx.navigateBack({
+          delta: 1
+        })
+      }, 1000)
     }).catch((error) => {
       console.log('fail', error);
+      wx.showToast({
+        title: '操作失败',
+        icon: 'none'
+      })
     });
   }
 

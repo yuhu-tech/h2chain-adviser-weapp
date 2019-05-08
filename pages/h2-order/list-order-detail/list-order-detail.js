@@ -128,6 +128,9 @@ Page({
             wechatname
             phonenumber
             worktimes
+            workhours
+            height
+            weight
             remark{
               startdate
               enddate
@@ -147,6 +150,13 @@ Page({
       }
       if (res.search[0].pt && res.search[0].pt.length > 0) {
         for (let item of res.search[0].pt) {
+          /* TODO */
+          if (item.remark) {
+            let start = new Date(item.remark.startdate * 1000)
+            let end = new Date(item.remark.enddate * 1000)
+            item.duration = `${util.formatNumber(start.getHours())}:${util.formatNumber(start.getMinutes())}~${util.formatNumber(end.getHours())}:${util.formatNumber(end.getMinutes())}`
+          }
+          /* ... */
           if (item.ptorderstate === 4) {
             temp_wait.push(item)
           } else if (item.ptorderstate === 3) {
@@ -179,7 +189,7 @@ Page({
 
   doCall: function(e) {
     wx.makePhoneCall({
-      phoneNumber: e.currentTarget.dataset.phone
+      phoneNumber: e.currentTarget.dataset.number
     })
   },
 
@@ -188,7 +198,8 @@ Page({
     gql.query({
       query: `query {
         search(
-          ptname:"${e.detail.value}"
+          orderid:"${this.data.orderid}"
+          ${e.detail.value ? `ptname: "${e.detail.value}"` : ''}
         ) {
           pt{
             ptid
@@ -199,9 +210,14 @@ Page({
             wechatname
             phonenumber
             worktimes
+            workhours
             height
             weight
-            workhours
+            remark{
+              startdate
+              enddate
+              realsalary
+            }
           }
         }
       }`
@@ -212,6 +228,13 @@ Page({
       let temp_wait = []
       if (res.search[0].pt && res.search[0].pt.length > 0) {
         for (let item of res.search[0].pt) {
+          /* TODO */
+          if (item.remark) {
+            let start = new Date(item.remark.startdate * 1000)
+            let end = new Date(item.remark.enddate * 1000)
+            item.duration = `${util.formatNumber(start.getHours())}:${util.formatNumber(start.getMinutes())}~${util.formatNumber(end.getHours())}:${util.formatNumber(end.getMinutes())}`
+          }
+          /* ... */
           if (item.ptorderstate === 4) {
             temp_wait.push(item)
           } else if (item.ptorderstate === 3) {
@@ -241,7 +264,8 @@ Page({
     });
   },
 
-  goPtInfo: function() {
+  goPtInfo: function(e) {
+    wx.setStorageSync('pt_info', e.currentTarget.dataset.item)
     wx.navigateTo({
       url: '/pages/h2-order/pt-info/pt-info',
     })
@@ -360,10 +384,10 @@ Page({
   },
 
   doNote: function(e) {
-    console.log(e)
+    wx.setStorageSync('remark', e.currentTarget.dataset.item.remark)
     let item = e.currentTarget.dataset.item
     wx.navigateTo({
-      url: `/pages/h2-order/list-order-note/list-order-note?orderid=${this.data.order_info.originorder.orderid}&ptid=${item.ptid}&salary=${this.data.order_info.postorder.salary}&worked=${item.remark?1:2}`,
+      url: `/pages/h2-order/list-order-note/list-order-note?orderid=${this.data.order_info.originorder.orderid}&ptid=${item.ptid}&salary=${this.data.order_info.postorder.salary}`,
     })
   }
 

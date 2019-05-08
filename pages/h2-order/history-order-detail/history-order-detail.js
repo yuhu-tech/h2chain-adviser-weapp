@@ -11,7 +11,7 @@ Page({
     orderid: 'default',
     order_info: '',
     value_channel: '',
-    pt_list: [{}, {}],
+    pt_list: [],
     multiArray: [
       ['代理端', 'PT分享', '顾问端分享', '现场扫码', '客户端报名'],
       []
@@ -23,7 +23,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     if (options.orderid) {
       this.setData({
         orderid: options.orderid
@@ -41,11 +41,14 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
     this.setData({
       ['multiArray[1]']: ['张大海', '赵小豪'],
       agent_list: ['张大海', '赵小豪'],
-      pt_list: ['周淑芬', '王小丽']
+    })
+    wx.showToast({
+      title: '加载中',
+      icon: 'loading'
     })
     gql.query({
       query: `query {
@@ -80,6 +83,24 @@ Page({
           countyet
           maleyet
           femaleyet
+          pt{
+            ptid
+            ptorderstate
+            name
+            idnumber
+            gender
+            wechatname
+            phonenumber
+            worktimes
+            workhours
+            height
+            weight
+            remark{
+              startdate
+              enddate
+              realsalary
+            }
+          }
         }
       }`
     }).then((res) => {
@@ -88,9 +109,18 @@ Page({
       if (res.search[0].modifiedorder.length > 0) {
         util.formatItemModify(res.search[0])
       }
+      for (let item of res.search[0].pt) {
+        if (item.remark) {
+          let start = new Date(item.remark.startdate * 1000)
+          let end = new Date(item.remark.enddate * 1000)
+          item.duration = `${util.formatNumber(start.getHours())}:${util.formatNumber(start.getMinutes())}~${util.formatNumber(end.getHours())}:${util.formatNumber(end.getMinutes())}`
+        }
+      }
       this.setData({
-        order_info: res.search[0]
+        order_info: res.search[0],
+        pt_list: res.search[0].pt
       })
+      wx.hideToast()
     }).catch((error) => {
       console.log('fail', error);
       wx.showToast({
@@ -135,9 +165,9 @@ Page({
 
   },
 
-  doCall: function() {
+  doCall: function(e) {
     wx.makePhoneCall({
-      phoneNumber: '1111111',
+      phoneNumber: e.currentTarget.dataset.number,
     })
   },
 
@@ -183,13 +213,73 @@ Page({
     })
   },
 
-  search: function() {
-    console.log('do search')
+  doSearch: function(e) {
+    gql.query({
+      query: `query {
+        search(
+          orderid:"${this.data.orderid}"
+          ${e.detail.value ? `ptname: "${e.detail.value}"` : ''}
+        ) {
+          pt{
+            ptid
+            ptorderstate
+            name
+            idnumber
+            gender
+            wechatname
+            phonenumber
+            worktimes
+            workhours
+            height
+            weight
+            remark{
+              startdate
+              enddate
+              realsalary
+            }
+          }
+        }
+      }`
+    }).then((res) => {
+      console.log('success', res);
+      if (!res.search[0].pt || res.search[0].pt.length === 0) {
+        wx.showToast({
+          title: '无结果',
+          icon: 'none'
+        })
+      }
+      for (let item of res.search[0].pt) {
+        if (item.remark) {
+          let start = new Date(item.remark.startdate * 1000)
+          let end = new Date(item.remark.enddate * 1000)
+          item.duration = `${util.formatNumber(start.getHours())}:${util.formatNumber(start.getMinutes())}~${util.formatNumber(end.getHours())}:${util.formatNumber(end.getMinutes())}`
+        }
+      }
+      this.setData({
+        pt_list: res.search[0].pt
+      })
+    }).catch((error) => {
+      console.log('fail', error);
+      wx.showToast({
+        title: '获取失败',
+        icon: 'none'
+      })
+    });
   },
 
-  goPtInfo: function() {
+  goPtInfo: function(e) {
+    wx.setStorageSync('pt_info', e.currentTarget.dataset.item)
     wx.navigateTo({
       url: '/pages/h2-order/pt-info/pt-info',
     })
+  },
+
+  doNote: function(e) {
+    wx.setStorageSync('remark', e.currentTarget.dataset.item.remark)
+    let item = e.currentTarget.dataset.item
+    wx.navigateTo({
+      url: `/pages/h2-order/list-order-note/list-order-note?orderid=${this.data.order_info.originorder.orderid}&ptid=${item.ptid}&salary=${this.data.order_info.postorder.salary}`,
+    })
   }
+
 })

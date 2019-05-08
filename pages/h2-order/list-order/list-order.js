@@ -37,6 +37,10 @@ Page({
         selected: 0
       })
     }
+    wx.showToast({
+      title: '获取中',
+      icon: 'loading'
+    })
     if (this.data.date) {
       this.bindDateChange()
       return
@@ -102,6 +106,7 @@ Page({
         order_list_wait: tempWait,
         order_list_ing: tempIng
       })
+      wx.hideToast()
     }).catch((error) => {
       console.log('fail', error);
       wx.showToast({
@@ -130,6 +135,9 @@ Page({
    */
   onPullDownRefresh: function() {
     wx.showNavigationBarLoading();
+    this.setData({
+      date: ''
+    })
     gql.query({
       query: `query{
         search(

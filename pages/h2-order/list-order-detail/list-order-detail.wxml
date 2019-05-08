@@ -67,6 +67,7 @@
       </view>
     </wux-row>
 
+    <!-- 待确认 -->
     <view class='divider_r' wx:if="{{pt_list_wait.length>0}}">
       <wux-divider position="right" text="待确认" />
     </view>
@@ -80,7 +81,7 @@
                 <view>
                   <view class='list_card_l_top'>
                     <text class='list_card_l_top_name'>{{item.name}}</text>
-                    <view class='list_card_l_top_name_phone' bindtap='doCall'>
+                    <view class='list_card_l_top_name_phone' bindtap='doCall' data-number='{{item.phonenumber}}'>
                       <image src='/images/order-phone.png'></image>
                       <text class='b200'>立刻联系</text>
                     </view>
@@ -94,7 +95,7 @@
                 </view>
               </view>
               <view class='list_card_r n200'>
-                <view class='link_arrow' bindtap='goPtInfo'>
+                <view class='link_arrow' bindtap='goPtInfo' data-item='{{item}}'>
                   <wux-icon type="ios-arrow-forward" size='20' />
                 </view>
               </view>
@@ -105,7 +106,7 @@
                 <!-- <text>用户端报名</text> -->
               </view>
               <wux-white-space body-style="height:20rpx" />
-              <view class='list_card_btm_btm_btn'>
+              <view class='list_card_btm_btm_btn' wx:if="{{item.remark===null}}">
                 <wux-button type='main' outline bind:click="doNote" data-item='{{item}}'>
                   <view class='text_btn'>用工备注</view>
                 </wux-button>
@@ -118,12 +119,17 @@
                   <view class='text_btn'>继续参加</view>
                 </wux-button>
               </view>
+              <view class='list_card_btm_btm_remark' wx:else>
+                <text>工作时间：{{item.duration}} 薪酬：{{item.remark.realsalary}}</text>
+                <text class='b200' bindtap='doNote' data-item='{{item}}'>编辑</text>
+              </view>
             </view>
           </view>
         </view>
       </wux-row>
     </block>
 
+    <!-- 已确认 -->
     <view class='divider_n' wx:if="{{pt_list_ing.length>0}}">
       <wux-divider position="right" text="已确认" />
     </view>
@@ -151,7 +157,7 @@
                 </view>
               </view>
               <view class='list_card_r n200'>
-                <view class='link_arrow' bindtap='goPtInfo'>
+                <view class='link_arrow' bindtap='goPtInfo' data-item='{{item}}'>
                   <wux-icon type="ios-arrow-forward" size='20' />
                 </view>
               </view>
@@ -162,7 +168,7 @@
                 <!-- <text>用户端报名</text> -->
               </view>
               <wux-white-space body-style="height:20rpx" />
-              <view class='list_card_btm_btm_btn'>
+              <view class='list_card_btm_btm_btn' wx:if="{{item.remark===null}}">
                 <wux-button type='main' outline bind:click="doNote" data-item='{{item}}'>
                   <view class='text_btn'>用工备注</view>
                 </wux-button>
@@ -171,6 +177,10 @@
                   <view class='text_btn'>拒绝</view>
                 </wux-button>
               </view>
+              <view class='list_card_btm_btm_remark' wx:else>
+                <text>工作时间：{{item.duration}} 薪酬：{{item.remark.realsalary}}</text>
+                <text class='b200' bindtap='doNote' data-item='{{item}}'>编辑</text>
+              </view>
             </view>
           </view>
           <wux-white-space body-style="height:30rpx" />
@@ -178,6 +188,7 @@
       </wux-row>
     </block>
 
+    <!-- 已报名 -->
     <view class='divider_n' wx:if="{{pt_list.length>0}}">
       <wux-divider position="right" text="已报名" />
     </view>
@@ -205,7 +216,7 @@
                 </view>
               </view>
               <view class='list_card_r n200'>
-                <view class='link_arrow' bindtap='goPtInfo'>
+                <view class='link_arrow' bindtap='goPtInfo' data-item='{{item}}'>
                   <wux-icon type="ios-arrow-forward" size='20' />
                 </view>
               </view>
@@ -216,7 +227,7 @@
                 <!-- <text>用户端报名</text> -->
               </view>
               <wux-white-space body-style="height:20rpx" />
-              <view class='list_card_btm_btm_btn'>
+              <view class='list_card_btm_btm_btn' wx:if="{{item.remark===null}}">
                 <wux-button type='main' outline bind:click="doNote" data-item='{{item}}'>
                   <view class='text_btn'>用工备注</view>
                 </wux-button>
@@ -224,6 +235,10 @@
                 <wux-button type='main' outline bind:click="doOut" data-ptid='{{item.ptid}}'>
                   <view class='text_btn'>拒绝</view>
                 </wux-button>
+              </view>
+              <view class='list_card_btm_btm_remark' wx:else>
+                <text>工作时间：{{item.duration}} 薪酬：{{item.remark.realsalary}}</text>
+                <text class='b200' bindtap='doNote' data-item='{{item}}'>编辑</text>
               </view>
             </view>
           </view>

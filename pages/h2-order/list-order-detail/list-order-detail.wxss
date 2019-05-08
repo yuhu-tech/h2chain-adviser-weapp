@@ -186,6 +186,11 @@ input {
   justify-content: flex-end;
 }
 
+.list_card_btm_btm_remark {
+  display: flex;
+  justify-content: space-between;
+}
+
 .text_btn {
   width: 150rpx;
 }
