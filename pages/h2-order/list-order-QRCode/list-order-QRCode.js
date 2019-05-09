@@ -77,7 +77,7 @@ Page({
       }
       this.setData({
         order_info: res.search[0],
-        url: `https://h2chain.yuhu.tech/miniprogram/pt?orderid=${this.data.orderid}`
+        url: `https://h2chain.yuhu.tech/miniprogram/pt?orderid=${this.data.orderid}&qrcode=qrcode`
       })
     }).catch((error) => {
       console.log('fail', error);

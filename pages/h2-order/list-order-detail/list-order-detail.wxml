@@ -120,11 +120,13 @@
                 </wux-button>
               </view>
               <view class='list_card_btm_btm_remark' wx:else>
-                <text>工作时间：{{item.duration}} 薪酬：{{item.remark.realsalary}}</text>
+                <text wx:if="{{item.remark.isworked===2}}">未参加工作</text>
+                <text wx:else>工作时间：{{item.duration}} 薪酬：{{item.remark.realsalary}}</text>
                 <text class='b200' bindtap='doNote' data-item='{{item}}'>编辑</text>
               </view>
             </view>
           </view>
+          <wux-white-space body-style="height:30rpx" />
         </view>
       </wux-row>
     </block>
@@ -178,7 +180,8 @@
                 </wux-button>
               </view>
               <view class='list_card_btm_btm_remark' wx:else>
-                <text>工作时间：{{item.duration}} 薪酬：{{item.remark.realsalary}}</text>
+                <text wx:if="{{item.remark.isworked===2}}">未参加工作</text>
+                <text wx:else>工作时间：{{item.duration}} 薪酬：{{item.remark.realsalary}}</text>
                 <text class='b200' bindtap='doNote' data-item='{{item}}'>编辑</text>
               </view>
             </view>
@@ -237,7 +240,8 @@
                 </wux-button>
               </view>
               <view class='list_card_btm_btm_remark' wx:else>
-                <text>工作时间：{{item.duration}} 薪酬：{{item.remark.realsalary}}</text>
+                <text wx:if="{{item.remark.isworked===2}}">未参加工作</text>
+                <text wx:else>工作时间：{{item.duration}} 薪酬：{{item.remark.realsalary}}</text>
                 <text class='b200' bindtap='doNote' data-item='{{item}}'>编辑</text>
               </view>
             </view>

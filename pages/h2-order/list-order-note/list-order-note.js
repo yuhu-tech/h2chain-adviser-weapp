@@ -1,6 +1,9 @@
 // pages/h2-order/list-order-note/list-order-note.js
 var gql = require('../../../utils/graphql.js')
 var util = require('../../../utils/util.js')
+import {
+  $inToptip
+} from '../../../components/index.js'
 
 Page({
 
@@ -13,7 +16,8 @@ Page({
     startTime: '',
     endDate: '',
     endTime: '',
-    realPay: ''
+    realPay: '',
+    type: 1
   },
 
   /**
@@ -45,11 +49,20 @@ Page({
       let endDate = `${end.getFullYear()}-${util.formatNumber(end.getMonth())}-${util.formatNumber(end.getDay())}`
       let endTime = `${util.formatNumber(end.getHours())}:${util.formatNumber(end.getMinutes())}`
       this.setData({
-        startDate: startDate,
-        startTime: startTime,
-        endDate: endDate,
-        endTime: endTime,
-        realPay: remark.realsalary
+        type: 2
+      })
+      if (remark.isworked === 1) {
+        this.setData({
+          startDate: startDate,
+          startTime: startTime,
+          endDate: endDate,
+          endTime: endTime,
+          realPay: remark.realsalary
+        })
+      }
+    } else {
+      this.setData({
+        type: 1
       })
     }
   },
@@ -127,9 +140,8 @@ Page({
         editremark(
           orderid:"${this.data.options.orderid}"
           ptid:"${this.data.options.ptid}"
-          startdate:0
-          enddate:0
           isworked:2
+          type:${this.data.type}
         )
       }`
     }).then((res) => {
@@ -137,6 +149,11 @@ Page({
       wx.showToast({
         title: '操作成功',
       })
+      setTimeout(() => {
+        wx.navigateBack({
+          delta: 1
+        })
+      }, 1000)
     }).catch((error) => {
       console.log('fail', error);
       wx.showToast({
@@ -147,6 +164,26 @@ Page({
   },
 
   doSave: function() {
+    if(!this.data.startDate){
+      $inToptip().show('请选择开始日期')
+      return
+    }
+    if (!this.data.startTime) {
+      $inToptip().show('请选择开始时间')
+      return
+    }
+    if (!this.data.endDate) {
+      $inToptip().show('请选择结束日期')
+      return
+    }
+    if (!this.data.endTime) {
+      $inToptip().show('请选择结束时间')
+      return
+    }
+    if (!this.data.realPay) {
+      $inToptip().show('请输入实发薪酬')
+      return
+    }
     let startStamp = new Date(`${this.data.startDate}T${this.data.startTime}:00`).getTime() / 1000
     let endStamp = new Date(`${this.data.endDate}T${this.data.endTime}:00`).getTime() / 1000
     gql.mutate({
@@ -158,7 +195,7 @@ Page({
           enddate:${Number(endStamp)}
           realsalary:${Number(this.data.realPay)}
           isworked:1
-          type:${1}
+          type:${this.data.type}
         )
       }`
     }).then((res) => {

@@ -135,6 +135,7 @@ Page({
               startdate
               enddate
               realsalary
+              isworked
             }
           }
         }
@@ -217,6 +218,7 @@ Page({
               startdate
               enddate
               realsalary
+              isworked
             }
           }
         }
