@@ -30,10 +30,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    wx.showToast({
-      title: '获取中',
-      icon: 'loading'
-    })
     gql.query({
       query: `query{
         search(
@@ -80,7 +76,6 @@ Page({
       this.setData({
         order_list: res.search
       })
-      wx.hideToast()
     }).catch((error) => {
       console.log('fail', error);
       wx.showToast({

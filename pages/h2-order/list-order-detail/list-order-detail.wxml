@@ -7,7 +7,6 @@
           <image src='/images/order-avatar.png' />
           <view>{{order_info.originorder.occupation}}</view>
         </view>
-
         <view class='modified' wx:if="{{order_info.modifiedorder.length>0}}">
           <wux-white-space body-style="height:10rpx" />
           <view class='top_card_cen'>
@@ -25,7 +24,6 @@
             <view class='top_card_cen_bd' />
           </view>
         </view>
-
         <wux-white-space body-style="height:20rpx" />
         <view class='top_card_cen'>
           <view>
@@ -40,7 +38,6 @@
             <text class='blank-l'>{{order_info.femaleyet}}/{{order_info.modifiedorder[0].changedfemale||order_info.originorder.female}} 女</text>
           </view>
         </view>
-
         <wux-white-space body-style="height:20rpx" />
         <view class='top_card_btm text_min'>
           <view class='top_card_btm_name'>{{order_info.hotel.hotelname}}</view>
@@ -48,9 +45,11 @@
         </view>
       </view>
     </wux-row>
+
+    <!-- search bar -->
     <wux-row>
       <view class='search_bar'>
-        <view class='search'>
+        <!-- <view class='search'>
           <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
             <view class='picker'>
               <view></view>
@@ -60,7 +59,7 @@
               </view>
             </view>
           </picker>
-        </view>
+        </view> -->
         <view class='search n200'>
           <input confirm-type='search' placeholder='输入姓名昵称' placeholder-class='search_p' bindconfirm='doSearchName' bindinput='doSearchName' />
         </view>

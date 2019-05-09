@@ -37,10 +37,6 @@ Page({
         selected: 0
       })
     }
-    wx.showToast({
-      title: '获取中',
-      icon: 'loading'
-    })
     if (this.data.date) {
       this.bindDateChange()
       return
@@ -106,7 +102,6 @@ Page({
         order_list_wait: tempWait,
         order_list_ing: tempIng
       })
-      wx.hideToast()
     }).catch((error) => {
       console.log('fail', error);
       wx.showToast({
@@ -182,7 +177,6 @@ Page({
           title: '暂无订单',
           icon: 'none'
         })
-        return
       }
       for (let item of res.search) {
         util.formatItemOrigin(item)

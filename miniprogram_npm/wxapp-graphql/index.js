@@ -82,6 +82,11 @@ module.exports = (function() {
         return {
           query: function(queryObj) {
             return new Promise(function(resolve, reject) {
+              wx.showToast({
+                title: '获取中',
+                icon: 'loading',
+                duration: 5000
+              })
               wx.request({
                 url: obj.url,
                 method: 'POST',
@@ -90,7 +95,18 @@ module.exports = (function() {
                   variables: queryObj.variables
                 }),
                 header: queryObj.header || (typeof obj.header === 'function' ? obj.header() : obj.header),
+                success: function(res) {
+                  wx.hideToast()
+                },
                 complete: function(res) {
+                  console.log('query')
+                  console.log(res)
+                  if (res.errMsg.indexOf('timeout') > -1) {
+                    wx.showToast({
+                      title: '请求超时',
+                      icon: 'none'
+                    })
+                  }
                   responseHandler(resolve, reject, res, obj.errorHandler);
                 }
               });
@@ -99,6 +115,11 @@ module.exports = (function() {
 
           mutate: function(mutateObj) {
             return new Promise(function(resolve, reject) {
+              wx.showToast({
+                title: '获取中',
+                icon: 'loading',
+                duration: 5000
+              })
               wx.request({
                 url: obj.url,
                 method: 'POST',
@@ -107,7 +128,18 @@ module.exports = (function() {
                   variables: mutateObj.variables
                 }),
                 header: mutateObj.header || (typeof obj.header === 'function' ? obj.header() : obj.header),
+                success: function(res) {
+                  wx.hideToast()
+                },
                 complete: function(res) {
+                  console.log('mutate')
+                  console.log(res)
+                  if (res.errMsg.indexOf('timeout') > -1) {
+                    wx.showToast({
+                      title: '请求超时',
+                      icon: 'none'
+                    })
+                  }
                   responseHandler(resolve, reject, res);
                 }
               });
