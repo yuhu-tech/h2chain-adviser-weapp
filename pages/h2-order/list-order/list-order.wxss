@@ -31,10 +31,14 @@ page {
 
 /* card_hd */
 
+.card_hd_padding {
+  padding: 20rpx;
+}
+
 .card_hd {
   display: flex;
   align-items: center;
-  padding: 20rpx;
+  justify-content: space-between;
 }
 
 .card_hd image {
@@ -55,7 +59,8 @@ page {
   align-items: center;
   padding: 20rpx;
   border-top: solid 1rpx #eee;
-  border-bottom: solid 1rpx #eee;
+  height: 100rpx;
+  /* border-bottom: solid 1rpx #eee; */
 }
 
 .card_bd_date {

@@ -59,15 +59,15 @@
       </view>
       <wux-white-space body-style='height:20rpx' />
       <view class='card_line_4'>
-        <wux-button type='main' outline>
+        <wux-button type='main' outline bind:click="jumpToPt">
           <view class='text_btn'>分享给PT</view>
         </wux-button>
-        <wux-button type='main' outline>
+        <wux-button class='card_line_4_btn' type='main' outline bind:click="jumpToAgent">
           <view class='text_btn'>分享给代理</view>
         </wux-button>
-        <wux-button type='main' bind:click="doClose">
+        <!-- <wux-button type='main' bind:click="doClose">
           <view class='text_btn'>关闭订单</view>
-        </wux-button>
+        </wux-button> -->
       </view>
     </view>
 

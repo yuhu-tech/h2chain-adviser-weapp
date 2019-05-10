@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/h2-order/list-order/list-order",
     "pages/h2-account/login/login",
+    "pages/h2-order/list-order/list-order",
     "pages/h2-order/list-order-note/list-order-note",
     "pages/h2-order/list-order-detail/list-order-detail",
     "pages/h2-account/home/home",
@@ -21,8 +21,7 @@
     "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "h2Chain-adviser",
-    "navigationBarTextStyle": "black",
-    "enablePullDownRefresh": true
+    "navigationBarTextStyle": "black"
   },
   "tabBar": {
     "custom": true,

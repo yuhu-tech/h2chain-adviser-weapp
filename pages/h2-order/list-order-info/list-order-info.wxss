@@ -45,7 +45,11 @@ swiper {
 
 .card_line_4 {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
+}
+
+.card_line_4_btn {
+  margin-left: 30rpx;
 }
 
 /* info */

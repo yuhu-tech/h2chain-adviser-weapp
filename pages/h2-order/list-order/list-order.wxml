@@ -16,14 +16,20 @@
 
     <!-- 待发布 -->
     <block wx:for="{{order_list_wait}}" wx:key="">
-      <view class='divider_r'>
+      <view class='divider_n'>
         <wux-divider position="right" text="待确认" wx:if="{{index===0}}" />
       </view>
       <view class='card'>
-        <view class='card_hd'>
-          <image src='/images/order-avatar.png' />
-          <view class='card_hd_job'>{{item.originorder.occupation}}</view>
-          <view class='n200'>{{item.hotel.hotelname}}</view>
+        <view class='card_hd card_hd_padding'>
+          <view class='card_hd'>
+            <image src='/images/order-avatar.png' />
+            <view class='card_hd_job'>{{item.originorder.occupation}}</view>
+            <view class='n200'>{{item.hotel.hotelname}}</view>
+          </view>
+          <view class='card_p_hd_link b200' bindtap='goNewOrder' data-orderid='{{item.originorder.orderid}}'>
+            <text class='card_p_hd_link_text'>发布招聘</text>
+            <wux-icon type="ios-arrow-forward" size='20' />
+          </view>
         </view>
         <view class='card_bd n200'>
           <view>
@@ -38,11 +44,11 @@
             <text>人数 {{item.originorder.count}}</text>
           </view>
         </view>
-        <view class='card_ft'>
+        <!-- <view class='card_ft'>
           <wux-button type='main' bind:click="goNewOrder" data-orderid='{{item.originorder.orderid}}'>
             <view class='text_btn'>发布招聘</view>
           </wux-button>
-        </view>
+        </view> -->
       </view>
       <wux-white-space body-style="height:30rpx" wx:if="{{index!=order_list_wait.length-1}}" />
     </block>
@@ -74,7 +80,7 @@
             </view>
           </view>
           <wux-white-space body-style="height:20rpx" />
-          <view class='card_p_bd_count'>
+          <view class='card_p_bd_count b200'>
             <view>
               <view wx:if="{{item.modifiedorder.length>0?(item.modifiedorder[0].changedmode===0):(item.originorder.mode===0)}}">
                 <text>人数 {{item.countyet}}/{{item.modifiedorder[0].changedcount||item.originorder.count}}</text>

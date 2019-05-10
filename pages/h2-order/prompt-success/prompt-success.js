@@ -106,14 +106,18 @@ Page({
     })
   },
 
-  jumpToAgent: function() {
-    wx.navigateToMiniProgram({
+  jumpToAgent: function () {
+    /* wx.navigateToMiniProgram({
       appId: 'wx0f2ab26c0f65377d',
       envVersion: 'trial',
       path: `/pages/h2-order/share/share?orderid=${this.data.orderid}`,
       success: res => {
         console.log(res)
       }
+    }) */
+    wx.showToast({
+      title: '敬请期待～❤︎',
+      icon: 'none'
     })
   }
 

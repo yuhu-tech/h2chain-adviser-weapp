@@ -46,7 +46,7 @@ Page({
     gql.query({
       query: `query {
         searchhistory(
-          ptid: "${this.data.pt_info.ptid}}"
+          ptid: "${this.data.pt_info.ptid}"
         ) {
           occupation
           hotelname

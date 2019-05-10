@@ -92,7 +92,3 @@ image {
   justify-content: space-between;
   align-items: center;
 }
-
-.none_tip {
-  text-align: center;
-}

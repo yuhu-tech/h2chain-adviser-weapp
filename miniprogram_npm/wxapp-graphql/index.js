@@ -99,8 +99,6 @@ module.exports = (function() {
                   wx.hideToast()
                 },
                 complete: function(res) {
-                  console.log('query')
-                  console.log(res)
                   if (res.errMsg.indexOf('timeout') > -1) {
                     wx.showToast({
                       title: '请求超时',
@@ -132,8 +130,6 @@ module.exports = (function() {
                   wx.hideToast()
                 },
                 complete: function(res) {
-                  console.log('mutate')
-                  console.log(res)
                   if (res.errMsg.indexOf('timeout') > -1) {
                     wx.showToast({
                       title: '请求超时',
