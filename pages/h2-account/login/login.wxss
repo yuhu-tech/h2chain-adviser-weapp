@@ -1,6 +1,6 @@
 /* pages/h2-account/login/login.wxss */
 
-page {
+.page {
   padding: 0rpx 40rpx;
 }
 

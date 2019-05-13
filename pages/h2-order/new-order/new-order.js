@@ -56,8 +56,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    console.log(1)
-    console.log(this.data.form.count)
     gql.query({
       query: `query{
         search(
@@ -104,8 +102,6 @@ Page({
           })
         }
       }
-      console.log(2)
-      console.log(this.data.form.count)
     }).catch((error) => {
       console.log('fail', error);
       wx.showToast({
@@ -113,12 +109,9 @@ Page({
         icon: 'none'
       })
     });
-    console.log(3)
-    console.log(this.data.form.count)
     wx.getStorage({
       key: 'workcontents',
       success: res => {
-        console.log(res)
         if (res.data.length > 0) {
           this.setData({
             ['form.workcontent']: res.data
@@ -126,11 +119,9 @@ Page({
         }
       },
     })
-    console.log(4)
     wx.getStorage({
       key: 'attentions',
       success: res => {
-        console.log(res)
         if (res.data.length > 0) {
           this.setData({
             ['form.attention']: res.data
@@ -213,7 +204,7 @@ Page({
     })
   },
 
-  doSubmit: function() {
+  doSubmit: function(e) {
     let form = this.data.form
     if (!form.salary) {
       $inToptip().show('请输入用工单价')
@@ -237,6 +228,7 @@ Page({
     gql.mutate({
       mutation: `mutation {
         postorder(
+          formid:"${e.detail.formId}"
           postorder: {
             orderid: "${this.data.orderid}"
             isfloat: ${Number(form.isFloat)}

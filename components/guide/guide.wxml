@@ -1,0 +1,5 @@
+<!--components/guide/guide.wxml-->
+<!-- 组件遮罩引导 -->
+<view class='mask-box' wx:if='{{isShow===true}}' catchtouchmove="noMove">
+  <view class='mask'></view>
+</view>

@@ -14,7 +14,9 @@ const getCtx = (selector, ctx = getCurrentPages()[getCurrentPages().length - 1])
 }
 
 const $inToptip = (selector = '#inToptip', ctx) => getCtx(selector, ctx)
+const $inGuide = (selector = '#inGuide', ctx) => getCtx(selector, ctx)
 
 export {
-  $inToptip
+  $inToptip,
+  $inGuide
 }

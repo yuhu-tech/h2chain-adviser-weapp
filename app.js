@@ -50,6 +50,7 @@ App({
   },
   globalData: {
     userInfo: null,
-    systemInfo: null
+    systemInfo: null,
+    isPacart: true
   }
 })

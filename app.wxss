@@ -76,3 +76,21 @@ page {
 .input-placeholder {
   color: #c8c8c8;
 }
+
+.form_button {
+  height: 70rpx;
+  font-size: 30rpx;
+  background-color: #50d9e3 !important;
+  color: #fff !important;
+  margin: 0;
+}
+
+.form_button_hover {
+  background-color: #00c1cf !important;
+  border-color: #00c1cf;
+  color: #fff !important;
+}
+
+.form_button::after {
+  border-color: #50d9e3;
+}
