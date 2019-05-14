@@ -1,7 +1,7 @@
 <!--pages/h2-account/login/login.wxml-->
 <toptip id="inToptip" />
 
-<view class="cu-modal {{modalName=='show'?'show':''}}">
+<!-- <view class="cu-modal {{modalName=='show'?'show':''}}">
   <view class="cu-dialog">
     <view class="cu-bar bg-white justify-end">
       <view class='content'>申请授权</view>
@@ -25,7 +25,7 @@
       </view>
     </view>
   </view>
-</view>
+</view> -->
 
 <view class="page">
   <view class="page__hd">
@@ -48,7 +48,7 @@
     </wux-row>
     <wux-white-space body-style='height:80rpx' />
     <wux-row>
-      <wux-button type='main' bind:click="isValidate">
+      <wux-button type='main' bind:click="isValidate" disabled='{{isDisabled}}'>
         <view class='text_btn'>
           <view class='btn_login'>
             <text>登录</text>

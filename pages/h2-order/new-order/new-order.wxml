@@ -81,7 +81,7 @@
 
   <view class='page_ft'>
     <form report-submit='true' report-submit-timeout='10000' bindsubmit='doSubmit'>
-      <button class='form_button' hover-class='form_button_hover' form-type='submit'>
+      <button class='form_button' hover-class='form_button_hover' form-type='submit' disabled='{{isDisabled}}'>
         <view class='text_btn'>发布招聘</view>
       </button>
     </form>

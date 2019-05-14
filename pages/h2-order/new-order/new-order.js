@@ -31,7 +31,8 @@ Page({
       salary: '',
       workcontent: '请选择工作内容的模板',
       attention: '请选择注意事项的模板'
-    }
+    },
+    isDisabled: false
   },
 
   /**
@@ -224,7 +225,9 @@ Page({
       icon: 'loading',
       duration: 10000
     })
-
+    this.setData({
+      isDisabled: true
+    })
     gql.mutate({
       mutation: `mutation {
         postorder(
@@ -241,14 +244,21 @@ Page({
         }
       }`
     }).then((res) => {
+      console.log('success', res)
+      this.setData({
+        isDisabled: false
+      })
       wx.redirectTo({
         url: `/pages/h2-order/prompt-success/prompt-success?orderid=${this.data.orderid}`,
       })
     }).catch((error) => {
-      console.log(error)
+      console.log('fail', error)
       wx.showToast({
         title: '发布失败',
         icon: 'none'
+      })
+      this.setData({
+        isDisabled: false
       })
     });
   }

@@ -53,5 +53,5 @@ page {
 }
 
 .wux-button {
-  width: 300rpx;
+  width: 500rpx;
 }

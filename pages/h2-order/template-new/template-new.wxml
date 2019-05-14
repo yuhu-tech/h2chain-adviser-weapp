@@ -6,7 +6,7 @@
   </view>
 
   <view class='btn_box'>
-    <wux-button type='main' bind:click="doSubmit">
+    <wux-button type='main' bind:click="doSubmit" disabled='{{isDisabled}}'>
       <view class='text_btn'>完成</view>
     </wux-button>
   </view>

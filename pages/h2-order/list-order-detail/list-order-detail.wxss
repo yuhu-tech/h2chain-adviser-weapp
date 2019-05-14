@@ -232,11 +232,11 @@ input {
 /* blank */
 
 .blank {
-  width: 30rpx;
+  width: 20rpx;
 }
 
 .blank-l {
-  margin-left: 30rpx;
+  margin-left: 20rpx;
 }
 
 /* modified */

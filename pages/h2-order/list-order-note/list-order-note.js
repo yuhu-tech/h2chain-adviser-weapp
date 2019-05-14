@@ -12,12 +12,14 @@ Page({
    */
   data: {
     options: '',
+    isIn: '已参加',
     startDate: '',
     startTime: '',
     endDate: '',
     endTime: '',
     realPay: '',
-    type: 1
+    type: 1,
+    range_in: ['已参加', '爽约']
   },
 
   /**
@@ -102,6 +104,13 @@ Page({
 
   },
 
+  doIsIn: function(e) {
+    console.log(e.detail.value)
+    this.setData({
+      isIn: Number(e.detail.value) === 0 ? '已参加' : '爽约'
+    })
+  },
+
   doStartDate: function(e) {
     console.log(e.detail.value)
     this.setData({
@@ -164,7 +173,11 @@ Page({
   },
 
   doSave: function() {
-    if(!this.data.startDate){
+    if (this.data.isIn === '爽约') {
+      this.doAbsence()
+      return
+    }
+    if (!this.data.startDate) {
       $inToptip().show('请选择开始日期')
       return
     }

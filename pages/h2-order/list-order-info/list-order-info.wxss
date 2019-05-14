@@ -118,5 +118,5 @@ swiper {
 /* blank */
 
 .blank {
-  margin-left: 30rpx;
+  margin-left: 20rpx;
 }

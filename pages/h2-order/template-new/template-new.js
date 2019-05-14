@@ -10,7 +10,8 @@ Page({
     type: 'workcontents',
     optiontype: 'add',
     id: '',
-    value: null
+    value: null,
+    isDisabled: false
   },
 
   /** 
@@ -81,6 +82,9 @@ Page({
   },
 
   doSubmit: function() {
+    this.setData({
+      isDisabled: true
+    })
     let value = encodeURI(this.data.value)
     if (this.data.optiontype === 'add') {
       gql.mutate({
@@ -105,6 +109,9 @@ Page({
         wx.showToast({
           title: '添加失败',
           icon: 'none'
+        })
+        this.setData({
+          isDisabled: false
         })
       });
     } else {
@@ -131,6 +138,9 @@ Page({
         wx.showToast({
           title: '修改失败',
           icon: 'none'
+        })
+        this.setData({
+          isDisabled: false
         })
       });
     }

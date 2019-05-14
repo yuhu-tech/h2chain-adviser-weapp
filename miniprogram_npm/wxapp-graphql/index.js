@@ -85,7 +85,7 @@ module.exports = (function() {
               wx.showToast({
                 title: '获取中',
                 icon: 'loading',
-                duration: 5000
+                duration: 10000
               })
               wx.request({
                 url: obj.url,
@@ -116,7 +116,7 @@ module.exports = (function() {
               wx.showToast({
                 title: '获取中',
                 icon: 'loading',
-                duration: 5000
+                duration: 10000
               })
               wx.request({
                 url: obj.url,

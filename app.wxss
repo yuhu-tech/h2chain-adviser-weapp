@@ -91,6 +91,13 @@ page {
   color: #fff !important;
 }
 
+button[disabled] {
+  background-color: #50d9e3 !important;
+  border-color: #50d9e3;
+  opacity: 0.4;
+  color: #fff !important;
+}
+
 .form_button::after {
   border-color: #50d9e3;
 }
