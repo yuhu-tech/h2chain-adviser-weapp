@@ -29,7 +29,6 @@ Component({
    */
   methods: {
     hideMask: function() {
-      console.log('click')
       wx.setStorageSync('mask', false)
       let mask_flag = wx.getStorageSync('mask')
       this.setData({

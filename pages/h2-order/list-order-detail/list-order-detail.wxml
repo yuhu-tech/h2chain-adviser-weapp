@@ -7,7 +7,7 @@
           <image src='/images/order-avatar.png' />
           <view>{{order_info.originorder.occupation}}</view>
         </view>
-        <view class='modified' wx:if="{{order_info.modifiedorder.length>0}}">
+        <view class='modified text_min' wx:if="{{order_info.modifiedorder.length>0}}">
           <wux-white-space body-style="height:10rpx" />
           <view class='top_card_cen'>
             <view>
@@ -25,7 +25,7 @@
           </view>
         </view>
         <wux-white-space body-style="height:20rpx" />
-        <view class='top_card_cen'>
+        <view class='top_card_cen text_min'>
           <view>
             <text>{{order_info.modifiedorder[0].date||order_info.originorder.date}}</text>
             <text class='blank-l'>{{order_info.modifiedorder[0].time||order_info.originorder.time}}</text>
@@ -39,7 +39,7 @@
           </view>
         </view>
         <wux-white-space body-style="height:20rpx" />
-        <view class='top_card_btm text_min'>
+        <view class='top_card_btm'>
           <view class='top_card_btm_name'>{{order_info.hotel.hotelname}}</view>
           <view>{{order_info.postorder.salary}}元/小时</view>
         </view>

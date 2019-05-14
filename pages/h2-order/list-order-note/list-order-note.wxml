@@ -13,7 +13,7 @@
       </picker>
     </view>
     <view class='item' wx:if="{{isIn==='已参加'}}">
-      <label>开始日期</label>
+      <label>工作日期</label>
       <picker mode="date" value="{{startDate}}" bindchange="doStartDate">
         <view class='picker'>
           <text class="{{startDate?'':'n200'}}">{{startDate||'请选择'}}</text>
@@ -30,7 +30,7 @@
         </view>
       </picker>
     </view>
-    <view class='item' wx:if="{{isIn==='已参加'}}">
+    <!-- <view class='item' wx:if="{{isIn==='已参加'}}">
       <label>结束日期</label>
       <picker mode="date" value="{{endDate}}" bindchange="doEndDate">
         <view class='picker'>
@@ -38,7 +38,7 @@
           <wux-icon class='n200' type="ios-arrow-forward" size='15' />
         </view>
       </picker>
-    </view>
+    </view> -->
     <view class='item' wx:if="{{isIn==='已参加'}}">
       <label>结束时间</label>
       <picker mode="time" value="{{endTime}}" bindchange="doEndTime">

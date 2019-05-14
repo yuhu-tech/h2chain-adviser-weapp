@@ -114,7 +114,8 @@ Page({
   doStartDate: function(e) {
     console.log(e.detail.value)
     this.setData({
-      startDate: e.detail.value
+      startDate: e.detail.value,
+      endTime: e.detail.value
     })
   },
 
@@ -125,11 +126,11 @@ Page({
     })
   },
 
-  doEndDate: function(e) {
+  /* doEndDate: function(e) {
     this.setData({
       endDate: e.detail.value
     })
-  },
+  }, */
 
   doEndTime: function(e) {
     this.setData({

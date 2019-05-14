@@ -37,7 +37,7 @@ page {
 }
 
 .text_min {
-  font-size: 11pt;
+  font-size: 10pt;
 }
 
 /* ----------wux---------- */
