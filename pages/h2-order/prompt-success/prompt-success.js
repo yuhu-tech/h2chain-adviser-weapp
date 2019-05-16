@@ -65,28 +65,7 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function(res) {
-    console.log(res);
-    if (!res.target) {
-      return {
-        title: 'none',
-        path: '/pages/h2-account/auth/auth?type=none',
-        imageUrl: '/images/order-avatar.png'
-      }
-    }
-    if (res.target.dataset.type === 'pt') {
-      return {
-        title: '分享给PT',
-        path: '/pages/h2-account/auth/auth?type=pt',
-        imageUrl: '/images/order-avatar.png'
-      }
-    }
-    if (res.target.dataset.type === 'adviser') {
-      return {
-        title: '分享给顾问',
-        path: '/pages/h2-account/auth/auth?type=adviser',
-        imageUrl: '/images/order-avatar.png'
-      }
-    }
+    
   },
 
   goReturn: function() {

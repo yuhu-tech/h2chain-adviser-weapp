@@ -88,6 +88,7 @@ Page({
         return
       }
       for (let item of res.search) {
+        item.avatar = util.selectAvatar(item.originorder.occupation)
         util.formatItemOrigin(item)
         if (item.modifiedorder.length > 0) {
           util.formatItemModify(item)
@@ -179,6 +180,7 @@ Page({
         })
       }
       for (let item of res.search) {
+        item.avatar = util.selectAvatar(item.originorder.occupation)
         util.formatItemOrigin(item)
         if (item.modifiedorder.length > 0) {
           util.formatItemModify(item)
@@ -266,6 +268,7 @@ Page({
       let tempWait = []
       let tempIng = []
       for (let item of res.search) {
+        item.avatar = util.selectAvatar(item.originorder.occupation)
         util.formatItemOrigin(item)
         if (item.modifiedorder.length > 0) {
           util.formatItemModify(item)

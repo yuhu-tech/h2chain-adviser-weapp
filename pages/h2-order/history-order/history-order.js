@@ -67,6 +67,7 @@ Page({
       }`
     }).then((res) => {
       for (let item of res.search) {
+        item.avatar = util.selectAvatar(item.originorder.occupation)
         util.formatItemOrigin(item)
         if (item.modifiedorder.length > 0) {
           util.formatItemModify(item)
@@ -144,6 +145,7 @@ Page({
       }`
     }).then((res) => {
       for (let item of res.search) {
+        item.avatar = util.selectAvatar(item.originorder.occupation)
         util.formatItemOrigin(item)
         if (item.modifiedorder.length > 0) {
           util.formatItemModify(item)
@@ -221,6 +223,7 @@ Page({
       }`
     }).then((res) => {
       for (let item of res.search) {
+        item.avatar = util.selectAvatar(item.originorder.occupation)
         util.formatItemOrigin(item)
         if (item.modifiedorder.length > 0) {
           util.formatItemModify(item)

@@ -5,7 +5,7 @@
     <view class='card'>
 
       <view class='card_info'>
-        <image src='/images/order-avatar.png'></image>
+        <image src='/images/avatar-default.jpeg'></image>
         <view class='card_info_text'>
           <view class='card_info_top'>
             <text class='card_info_text_l'>{{pt_info.name}}</text>

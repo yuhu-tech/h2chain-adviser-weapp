@@ -12,7 +12,7 @@
 
     <view class='card'>
       <view class='card_line_1'>
-        <image src='/images/order-avatar.png' />
+        <image src='{{avatar}}' />
         <text>{{order.originorder.occupation}}</text>
       </view>
       <wux-white-space body-style='height:20rpx' />

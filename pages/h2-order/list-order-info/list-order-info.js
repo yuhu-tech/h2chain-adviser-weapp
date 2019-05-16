@@ -9,7 +9,8 @@ Page({
    */
   data: {
     orderid: 'default',
-    order: ''
+    order: '',
+    avatar: ''
   },
 
   /**
@@ -82,6 +83,7 @@ Page({
       }`
     }).then((res) => {
       console.log('success', res);
+      let avatar = util.selectAvatar(res.search[0].originorder.occupation)
       util.formatItemOrigin(res.search[0])
       if (res.search[0].modifiedorder.length > 0) {
         util.formatItemModify(res.search[0])
@@ -155,7 +157,7 @@ Page({
     })
   },
 
-  jumpToPt: function () {
+  jumpToPt: function() {
     wx.navigateToMiniProgram({
       appId: 'wx0f2ab26c0f65377d',
       envVersion: 'trial',
@@ -166,7 +168,7 @@ Page({
     })
   },
 
-  jumpToAgent: function () {
+  jumpToAgent: function() {
     /* wx.navigateToMiniProgram({
       appId: 'wx0f2ab26c0f65377d',
       envVersion: 'trial',
@@ -177,7 +179,7 @@ Page({
     }) */
     wx.showToast({
       title: '敬请期待～❤︎',
-      icon:'none'
+      icon: 'none'
     })
   }
 

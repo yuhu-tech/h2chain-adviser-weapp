@@ -19,7 +19,7 @@
       <view class='card' bindtap='goDetail' data-orderid='{{item.originorder.orderid}}'>
         <view class='card_p_hd'>
           <view class='card_p_hd_img'>
-            <image src='/images/order-avatar.png' />
+            <image src='{{item.avatar}}' />
             <view class='card_hd_job'>{{item.originorder.occupation||'职位'}}</view>
           </view>
           <view class='card_p_hd_link b200'>

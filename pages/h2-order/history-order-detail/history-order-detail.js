@@ -17,7 +17,8 @@ Page({
       []
     ],
     multiIndex: [0, 0],
-    regMode: ''
+    regMode: '',
+    avatar: ''
   },
 
   /**
@@ -105,6 +106,7 @@ Page({
       }`
     }).then((res) => {
       console.log('success', res);
+      let avatar = util.selectAvatar(res.search[0].originorder.occupation)
       util.formatItemOrigin(res.search[0])
       if (res.search[0].modifiedorder.length > 0) {
         util.formatItemModify(res.search[0])
@@ -118,7 +120,8 @@ Page({
       }
       this.setData({
         order_info: res.search[0],
-        pt_list: res.search[0].pt
+        pt_list: res.search[0].pt,
+        avatar: avatar
       })
       wx.hideToast()
     }).catch((error) => {

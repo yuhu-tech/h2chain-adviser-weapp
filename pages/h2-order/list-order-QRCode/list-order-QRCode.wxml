@@ -2,7 +2,7 @@
 <view class='page'>
   <view class='card'>
     <view class='card_top'>
-      <image src='/images/order-avatar.png'></image>
+      <image src='{{avatar}}'></image>
       <text>{{order_info.originorder.occupation}}</text>
     </view>
     <view class='card_cen'>

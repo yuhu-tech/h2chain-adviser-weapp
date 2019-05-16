@@ -32,7 +32,8 @@ Page({
       workcontent: '请选择工作内容的模板',
       attention: '请选择注意事项的模板'
     },
-    isDisabled: false
+    isDisabled: false,
+    avatar: ''
   },
 
   /**
@@ -79,6 +80,7 @@ Page({
       }`
     }).then((res) => {
       console.log('success', res);
+      let avatar = util.selectAvatar(res.search[0].originorder.occupation)
       util.formatItemOrigin(res.search[0])
       if (res.search[0].modifiedorder && res.search[0].modifiedorder.length > 0) {
         util.formatItemModify(res.search[0])
@@ -87,7 +89,8 @@ Page({
         order: res.search[0],
         ['form.count']: res.search[0].originorder.count,
         ['form.male']: res.search[0].originorder.male,
-        ['form.female']: res.search[0].originorder.female
+        ['form.female']: res.search[0].originorder.female,
+        avatar: avatar
       })
       if (this.data.order.originorder.mode === 0) {
         if (Number(this.data.form.isFloat) === 1) {

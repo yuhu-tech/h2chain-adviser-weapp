@@ -4,7 +4,7 @@
     <wux-row>
       <view class='top_card'>
         <view class='top_card_top'>
-          <image src='/images/order-avatar.png' />
+          <image src='{{avatar}}' />
           <view>{{order_info.originorder.occupation}}</view>
         </view>
         <view class='modified text_min' wx:if="{{order_info.modifiedorder.length>0}}">
@@ -61,7 +61,7 @@
           </picker>
         </view> -->
         <view class='search n200'>
-          <input confirm-type='search' placeholder='输入姓名昵称' placeholder-class='search_p' bindconfirm='doSearchName' bindinput='doSearchName' />
+          <input confirm-type='search' placeholder='输入姓名搜索' placeholder-class='search_p' bindconfirm='doSearchName' bindinput='doSearchName' />
         </view>
       </view>
     </wux-row>
@@ -76,7 +76,7 @@
           <view class='list_card'>
             <view class='list_card_top'>
               <view class='list_card_l'>
-                <image class='list_card_avatar' src='/images/order-avatar.png' />
+                <image class='list_card_avatar' src='{{avatar}}' />
                 <view>
                   <view class='list_card_l_top'>
                     <text class='list_card_l_top_name'>{{item.name}}</text>
@@ -141,7 +141,7 @@
           <view class='list_card'>
             <view class='list_card_top'>
               <view class='list_card_l'>
-                <image class='list_card_avatar' src='/images/order-avatar.png' />
+                <image class='list_card_avatar' src='{{avatar}}' />
                 <view>
                   <view class='list_card_l_top'>
                     <text class='list_card_l_top_name'>{{item.name}}</text>
@@ -202,11 +202,11 @@
           <view class='list_card'>
             <view class='list_card_top'>
               <view class='list_card_l'>
-                <image class='list_card_avatar' src='/images/order-avatar.png' />
+                <image class='list_card_avatar' src='{{avatar}}' />
                 <view>
                   <view class='list_card_l_top'>
                     <text class='list_card_l_top_name'>{{item.name}}</text>
-                    <view class='list_card_l_top_name_phone' bindtap='doCall' data-phone='{{item.phonenumber}}'>
+                    <view class='list_card_l_top_name_phone' bindtap='doCall' data-number='{{item.phonenumber}}'>
                       <image src='/images/order-phone.png'></image>
                       <text class='b200'><!-- 立刻联系 --></text>
                     </view>
@@ -248,6 +248,7 @@
               </view>
             </view>
           </view>
+          <wux-white-space body-style="height:30rpx" />
         </view>
       </wux-row>
     </block>

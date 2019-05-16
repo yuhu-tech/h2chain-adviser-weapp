@@ -9,7 +9,8 @@ Page({
    */
   data: {
     orderid: 'default',
-    url: ''
+    url: '',
+    avatar: ''
   },
 
   /**
@@ -71,13 +72,15 @@ Page({
       }`
     }).then((res) => {
       console.log('success', res);
+      let avatar = util.selectAvatar(res.search[0].originorder.occupation)
       util.formatItemOrigin(res.search[0])
       if (res.search[0].modifiedorder.length > 0) {
         util.formatItemModify(res.search[0])
       }
       this.setData({
         order_info: res.search[0],
-        url: `https://h2chain.yuhu.tech/miniprogram/pt?orderid=${this.data.orderid}&qrcode=qrcode`
+        url: `https://h2chain.yuhu.tech/miniprogram/pt?orderid=${this.data.orderid}&qrcode=qrcode`,
+        avatar: avatar
       })
     }).catch((error) => {
       console.log('fail', error);

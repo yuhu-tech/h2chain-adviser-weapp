@@ -42,9 +42,41 @@ const formatItemModify = item => {
   return item
 }
 
+const selectAvatar = occupation => {
+  switch (occupation) {
+    case '西餐服务员':
+      return '/images/avatar-waiter.jpeg';
+    case '西中餐服务员':
+      return '/images/avatar-waiter.jpeg';
+    case '宴会服务员':
+      return '/images/avatar-waiter.jpeg';
+    case '大堂吧服务员':
+      return '/images/avatar-waiter.jpeg';
+    case '迎宾员':
+      return '/images/avatar-usher.jpeg';
+    case '砧板':
+      return '/images/avatar-chef.jpeg';
+    case '打荷':
+      return '/images/avatar-chef.jpeg';
+    case '炒锅':
+      return '/images/avatar-chef.jpeg';
+    case '凉菜':
+      return '/images/avatar-chef.jpeg';
+    case '烧腊':
+      return '/images/avatar-chef.jpeg';
+    case '厨房帮工':
+      return '/images/avatar-chef.jpeg';
+    case '管事部帮工':
+      return '/images/avatar-chef.jpeg';
+    default:
+      return '/images/avatar-waiter.jpeg'
+  }
+}
+
 module.exports = {
   formatTime,
   formatNumber,
   formatItemOrigin,
-  formatItemModify
+  formatItemModify,
+  selectAvatar
 }

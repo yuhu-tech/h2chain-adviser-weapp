@@ -18,7 +18,8 @@ Page({
       []
     ],
     multiIndex: [0, 0],
-    regMode: ''
+    regMode: '',
+    avatar: ''
   },
 
   /**
@@ -145,6 +146,7 @@ Page({
       let temp_list = []
       let temp_ing = []
       let temp_wait = []
+      let avatar = util.selectAvatar(res.search[0].originorder.occupation)
       util.formatItemOrigin(res.search[0])
       if (res.search[0].modifiedorder.length > 0) {
         util.formatItemModify(res.search[0])
@@ -177,7 +179,8 @@ Page({
         order_info: res.search[0],
         pt_list: temp_list,
         pt_list_wait: temp_wait,
-        pt_list_ing: temp_ing
+        pt_list_ing: temp_ing,
+        avatar: avatar
       })
     }).catch((error) => {
       console.log('fail', error);

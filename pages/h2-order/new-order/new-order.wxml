@@ -7,7 +7,7 @@
     <view class='card_info'>
       <view class='card'>
         <view class='card_top'>
-          <image src='/images/order-avatar.png' />
+          <image src='{{avatar}}' />
           <text class='card_top_job'>{{order.originorder.occupation}}</text>
           <text class='n200'>{{order.hotel.hotelname}}</text>
         </view>

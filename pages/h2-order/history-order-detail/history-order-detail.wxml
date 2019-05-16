@@ -5,7 +5,7 @@
     <wux-row>
       <view class='top_card'>
         <view class='top_card_top'>
-          <image src='/images/order-avatar.png' />
+          <image src='{{avatar}}' />
           <view>{{order_info.originorder.occupation}}</view>
         </view>
 
@@ -80,7 +80,7 @@
           <view class='list_card'>
             <view class='list_card_top'>
               <view class='list_card_l'>
-                <image class='list_card_avatar' src='/images/order-avatar.png' />
+                <image class='list_card_avatar' src='{{avatar}}' />
                 <view>
                   <view class='list_card_l_top'>
                     <text class='list_card_l_top_name'>{{item.name}}</text>

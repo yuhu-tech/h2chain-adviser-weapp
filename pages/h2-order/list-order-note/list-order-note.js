@@ -115,7 +115,7 @@ Page({
     console.log(e.detail.value)
     this.setData({
       startDate: e.detail.value,
-      endTime: e.detail.value
+      endDate: e.detail.value
     })
   },
 
