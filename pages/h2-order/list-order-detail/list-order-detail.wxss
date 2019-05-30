@@ -70,7 +70,6 @@ page {
   background-color: #ececec;
   border-radius: 10rpx;
   height: 80rpx;
-  width: 325rpx;
   padding: 0 30rpx;
   box-sizing: border-box;
 }
@@ -79,8 +78,7 @@ page {
 
 .search {
   padding: 30rpx 30rpx 0;
-  /* width: 325rpx; */
-  width: 100%;
+  width: 350rpx;
 }
 
 .search_p {

@@ -97,3 +97,10 @@ page {
   align-items: center;
   padding: 20rpx;
 }
+
+/* chain */
+
+.card_p_ft {
+  display: flex;
+  justify-content: flex-end;
+}

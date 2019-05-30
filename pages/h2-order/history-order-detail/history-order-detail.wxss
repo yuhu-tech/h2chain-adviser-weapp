@@ -82,8 +82,9 @@ page {
 /* search */
 
 .search {
-  padding: 30rpx 0;
-  width: 325rpx;
+  padding: 30rpx;
+  /* width: 325rpx; */
+  width: 100%;
 }
 
 .search_p {
@@ -155,10 +156,11 @@ input {
 
 .list_card_l_btm {
   display: flex;
+  align-items: center;
 }
 
-.list_card_l_btm_age {
-  margin: 0 30rpx;
+.list_card_l_btm_blank {
+  margin-left: 30rpx;
 }
 
 .list_card_l, .list_card_r {
@@ -201,6 +203,20 @@ input {
 
 .list_card_btm_btm_remark_time {
   margin-right: 20rpx;
+}
+
+.list_card_btm_btm_chain {
+  display: flex;
+  justify-content: flex-end;
+  padding: 30rpx;
+  border-top: solid 1rpx #eee;
+}
+
+.list_card_btm_btm_chain text {
+  width: 400rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 /* modified */

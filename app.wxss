@@ -20,6 +20,10 @@ page {
   color: #c8c8c8;
 }
 
+.n96 {
+  color: #969696;
+}
+
 .r200 {
   color: #ff482c;
 }

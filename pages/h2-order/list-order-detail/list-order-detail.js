@@ -14,7 +14,7 @@ Page({
     pt_list_wait: [],
     pt_list_ing: [],
     multiArray: [
-      ['代理端', 'PT分享', '顾问端分享', '现场扫码', '客户端报名'],
+      ['自由报名', '顾问端分享', '代理端分享'],
       []
     ],
     multiIndex: [0, 0],
@@ -44,10 +44,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    this.setData({
-      ['multiArray[1]']: ['张大海', '赵小豪'],
-      agent_list: ['张大海', '赵小豪']
-    })
     this.doSearch()
   },
 
@@ -139,6 +135,10 @@ Page({
               isworked
             }
           }
+          agent{
+            agentid
+            name
+          }
         }
       }`
     }).then((res) => {
@@ -153,13 +153,11 @@ Page({
       }
       if (res.search[0].pt && res.search[0].pt.length > 0) {
         for (let item of res.search[0].pt) {
-          /* TODO */
           if (item.remark) {
             let start = new Date(item.remark.startdate * 1000)
             let end = new Date(item.remark.enddate * 1000)
             item.duration = `${util.formatNumber(start.getHours())}:${util.formatNumber(start.getMinutes())}~${util.formatNumber(end.getHours())}:${util.formatNumber(end.getMinutes())}`
           }
-          /* ... */
           if (item.ptorderstate === 4) {
             temp_wait.push(item)
           } else if (item.ptorderstate === 3) {
@@ -180,7 +178,9 @@ Page({
         pt_list: temp_list,
         pt_list_wait: temp_wait,
         pt_list_ing: temp_ing,
-        avatar: avatar
+        avatar: avatar,
+        ['multiArray[1]']: res.search[0].agent,
+        agent_list: res.search[0].agent
       })
     }).catch((error) => {
       console.log('fail', error);

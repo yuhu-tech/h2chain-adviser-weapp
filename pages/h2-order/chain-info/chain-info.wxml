@@ -1,0 +1,168 @@
+<!--pages/h2-order/chain_info/chain_info.wxml-->
+<view class='page'>
+  <!-- address -->
+  <view class='address'>
+    <view class='addr_title' bindtap='rotateAnim'>链上地址</view>
+    <view class='addr_item'>
+      <text class='addr_item_label'>所在链:</text>
+      <text class='addr_item_value'>{{info.chainname}}</text>
+    </view>
+    <view class='addr_item'>
+      <text class='addr_item_label'>区块高度:</text>
+      <text class='addr_item_value'>{{info.blocknumber}}</text>
+    </view>
+    <view class='addr_item'>
+      <text class='addr_item_label'>合约名:</text>
+      <text class='addr_item_value' wx:if='{{flag_address}}'>{{info.contractaddress}}</text>
+      <text class='b200' wx:else bindtap='doCopy' data-text='{{info.contractaddress}}'>复制</text>
+    </view>
+    <view class='expand' wx:if='{{!flag_address}}'>
+      <text>{{info.contractaddress}}</text>
+    </view>
+    <view class='addr_item'>
+      <text class='addr_item_label'>交易Hash:</text>
+      <text class='addr_item_value' wx:if='{{flag_address}}'>{{info.hash}}</text>
+      <text class='b200' wx:else bindtap='doCopy' data-text='{{info.hash}}'>复制</text>
+    </view>
+    <view class='expand' wx:if='{{!flag_address}}'>
+      <text>{{info.hash}}</text>
+    </view>
+    <view class='addr_item' wx:if='{{flag_address}}'>
+      <text />
+      <text class='b200' bindtap='doExpand' data-type='address'>展开</text>
+    </view>
+    <view class='addr_item' wx:else>
+      <text />
+      <text class='b200' bindtap='doFold' data-type='address'>折叠</text>
+    </view>
+    <view class='addr_logo'>
+      <image src='/images/chain_logo.png' />
+    </view>
+  </view>
+
+  <!-- tripartite -->
+  <view class='tripartite'>
+    <view class='tripartite_title'>三方信息</view>
+    <view class='item'>
+
+      <view class='item_title'>
+        <text>PT信息</text>
+        <text wx:if='{{flag_pt}}' bindtap='doExpand' data-type='pt'>展开</text>
+        <text wx:else bindtap='doFold' data-type='pt'>折叠</text>
+      </view>
+      <view class='item_cont'>
+        <view class='item_cont_item'>
+          <text>姓名:</text>
+          <text class='tripartite_value'>{{info.ptname}}</text>
+        </view>
+        <view class='item_cont_item item_cont_item_blank'>
+          <text>链上地址:</text>
+          <text class='tripartite_value' wx:if='{{flag_pt}}'>{{info.ptaddr}}</text>
+          <text class='b200' wx:else bindtap='doCopy' data-text='{{info.ptaddr}}'>复制</text>
+        </view>
+        <view class='expand_tripartite' wx:if='{{!flag_pt}}'>
+          <text>{{info.ptaddr}}</text>
+        </view>
+        <view class='item_cont_item item_cont_item_blank'>
+          <text>身份证号:</text>
+          <text class='tripartite_value' wx:if='{{flag_pt}}'>{{info.ptcer}}</text>
+          <text class='b200' wx:else bindtap='doCopy' data-text='{{info.ptcer}}'>复制</text>
+        </view>
+        <view class='expand_tripartite' wx:if='{{!flag_pt}}'>
+          <text>{{info.ptcer}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class='item'>
+      <view class='item_title'>
+        <text>酒店信息</text>
+        <text wx:if='{{flag_hotel}}' bindtap='doExpand' data-type='hotel'>展开</text>
+        <text wx:else bindtap='doFold' data-type='hotel'>折叠</text>
+      </view>
+      <view class='item_cont'>
+        <view class='item_cont_item'>
+          <text>酒店信息:</text>
+          <text class='tripartite_value'>{{info.hotelname}}</text>
+        </view>
+        <view class='item_cont_item item_cont_item_blank'>
+          <text>统一社会信用代码:</text>
+          <text class='tripartite_value' wx:if='{{flag_hotel}}'>{{info.hotelcer}}</text>
+          <text class='b200' wx:else bindtap='doCopy' data-text='{{info.hotelcer}}'>复制</text>
+        </view>
+        <view class='expand_tripartite' wx:if='{{!flag_hotel}}'>
+          <text>{{info.hotelcer}}</text>
+        </view>
+        <view class='item_cont_item item_cont_item_blank'>
+          <text>链上地址:</text>
+          <text class='tripartite_value' wx:if='{{flag_hotel}}'>{{info.hoteladdr}}</text>
+          <text class='b200' wx:else bindtap='doCopy' data-text='{{info.hoteladdr}}'>复制</text>
+        </view>
+        <view class='expand_tripartite' wx:if='{{!flag_hotel}}'>
+          <text>{{info.hoteladdr}}</text>
+        </view>
+        <view class='item_cont_item item_cont_item_blank'>
+          <text>HR姓名:</text>
+          <text class='tripartite_value'>{{info.hotelhrname}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class='item'>
+      <view class='item_title'>
+        <text>顾问信息</text>
+        <text wx:if='{{flag_adviser}}' bindtap='doExpand' data-type='adviser'>展开</text>
+        <text wx:else bindtap='doFold' data-type='adviser'>折叠</text>
+      </view>
+      <view class='item_cont'>
+        <view class='item_cont_item'>
+          <text>公司名称:</text>
+          <text class='tripartite_value'>{{info.advisername}}</text>
+        </view>
+        <view class='item_cont_item item_cont_item_blank'>
+          <text>统一社会信用代码:</text>
+          <text class='tripartite_value' wx:if='{{flag_adviser}}'>{{info.advisercer}}</text>
+          <text class='b200' wx:else bindtap='doCopy' data-text='{{info.advisercer}}'>复制</text>
+        </view>
+        <view class='expand_tripartite' wx:if='{{!flag_adviser}}'>
+          <text>{{info.advisercer}}</text>
+        </view>
+        <view class='item_cont_item item_cont_item_blank'>
+          <text>链上地址:</text>
+          <text class='tripartite_value' wx:if='{{flag_adviser}}'>{{info.adviseraddr}}</text>
+          <text class='b200' wx:else bindtap='doCopy' data-text='{{info.adviseraddr}}'>复制</text>
+        </view>
+        <view class='expand_tripartite' wx:if='{{!flag_adviser}}'>
+          <text>{{info.adviseraddr}}</text>
+        </view>
+        <view class='item_cont_item item_cont_item_blank'>
+          <text>顾问姓名:</text>
+          <text class='tripartite_value'>{{info.adviserhrname}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class='item'>
+      <view class='item_title item_title_n'>工作信息</view>
+      <view class='item_cont'>
+        <view class='item_cont_item'>
+          <text>职位:</text>
+          <text class='tripartite_value'>{{info.occupation}}</text>
+        </view>
+        <view class='item_cont_item item_cont_item_blank'>
+          <text>工作时间:</text>
+          <text class='tripartite_value'>{{info.datetime}}</text>
+        </view>
+        <view class='item_cont_item item_cont_item_blank'>
+          <text>酒店名称:</text>
+          <text class='tripartite_value'>{{info.hotelname}}</text>
+        </view>
+        <view class='item_cont_item item_cont_item_blank'>
+          <text>是否参与:</text>
+          <text class='tripartite_value'>{{info.isrefused===1?'是':'否'}}</text>
+        </view>
+      </view>
+    </view>
+
+  </view>
+</view>

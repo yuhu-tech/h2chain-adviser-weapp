@@ -140,8 +140,8 @@ Page({
         icon: 'success'
       })
       setTimeout(() => {
-        wx.switchTab({
-          url: '/pages/h2-account/home/home',
+        wx.navigateBack({
+          delta: 1,
         })
       }, 1000)
     }).catch((error) => {

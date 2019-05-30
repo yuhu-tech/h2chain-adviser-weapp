@@ -1,11 +1,14 @@
-// pages/h2-account/home/home.js
+// pages/h2-account/wallet/wallet.js
+var gql = require('../../../utils/graphql.js')
 
 Page({
 
   /**
    * 页面的初始数据
    */
-  data: {},
+  data: {
+    info: ''
+  },
 
   /**
    * 生命周期函数--监听页面加载
@@ -25,12 +28,25 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    if (typeof this.getTabBar === 'function' &&
-      this.getTabBar()) {
-      this.getTabBar().setData({
-        selected: 1
+    gql.query({
+      query: `query{
+        mywallet{
+          ptaddr
+          balance
+        }
+      }`
+    }).then((res) => {
+      console.log('success', res);
+      this.setData({
+        info: res.mywallet
       })
-    }
+    }).catch((error) => {
+      console.log('fail', error);
+      wx.showToast({
+        title: '获取失败',
+        icon: 'none'
+      })
+    });
   },
 
   /**
@@ -66,13 +82,6 @@ Page({
    */
   onShareAppMessage: function() {
 
-  },
-
-  showWaiting: function() {
-    wx.showToast({
-      title: '暂未开放❤︎',
-      icon: 'none'
-    })
   }
 
 })

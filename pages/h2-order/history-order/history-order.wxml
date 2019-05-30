@@ -52,6 +52,10 @@
           </view>
         </view>
 
+        <view class='card_p_ft'>
+          <view class='b200'>{{item.countyet}}份三方合同已存证上链</view>
+        </view>
+
       </view>
       <wux-white-space body-style="height:30rpx" />
     </block>

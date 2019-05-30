@@ -329,10 +329,11 @@ Page({
   },
 
   jumpToAgent: function(e) {
+    console.log(e)
     wx.navigateToMiniProgram({
-      appId: 'wx0f2ab26c0f65377d',
+      appId: 'wx4a5990881a856d65',
       envVersion: 'trial',
-      path: `/pages/h2-account/auth/auth?orderid=${e.currentTarget.dataset.orderid}`,
+      path: `/pages/h2-account/auth/auth?adviser=adviser&orderid=${e.currentTarget.dataset.orderid}`,
       success: res => {
         console.log(res)
       }

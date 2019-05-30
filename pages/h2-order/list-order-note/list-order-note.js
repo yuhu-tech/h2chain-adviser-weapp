@@ -200,6 +200,17 @@ Page({
     }
     let startStamp = new Date(`${this.data.startDate}T${this.data.startTime}:00`).getTime() / 1000
     let endStamp = new Date(`${this.data.endDate}T${this.data.endTime}:00`).getTime() / 1000
+    console.log(this.data.startDate)
+    console.log(this.data.startTime)
+    console.log(startStamp)
+    console.log(this.data.endDate)
+    console.log(this.data.endTime)
+    console.log(endStamp)
+    if (endStamp < startStamp) {
+      endStamp += 86400
+    }
+    console.log(startStamp)
+    console.log(endStamp)
     gql.mutate({
       mutation: `mutation{
         editremark(

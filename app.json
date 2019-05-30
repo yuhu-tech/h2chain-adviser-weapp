@@ -1,10 +1,15 @@
 {
   "pages": [
     "pages/h2-account/login/login",
+    "pages/h2-account/home/home",
+    "pages/h2-account/wallet/wallet",
+    "pages/h2-account/person-info/person-info",
+    "pages/h2-account/term/term",
+    "pages/h2-account/version/version",
+    "pages/h2-account/setting/setting",
     "pages/h2-order/list-order/list-order",
     "pages/h2-order/list-order-note/list-order-note",
     "pages/h2-order/list-order-detail/list-order-detail",
-    "pages/h2-account/home/home",
     "pages/h2-account/change-password/change-password",
     "pages/h2-order/new-order/new-order",
     "pages/h2-order/template-new/template-new",
@@ -15,7 +20,8 @@
     "pages/h2-order/history-order-detail/history-order-detail",
     "pages/h2-order/prompt-success/prompt-success",
     "pages/h2-order/prompt-close/prompt-close",
-    "pages/h2-order/pt-info/pt-info"
+    "pages/h2-order/pt-info/pt-info",
+    "pages/h2-order/chain-info/chain-info"
   ],
   "window": {
     "backgroundTextStyle": "dark",
@@ -36,11 +42,12 @@
     ]
   },
   "networkTimeout": {
-    "request": 5000,
-    "downloadFile": 5000
+    "request": 10000,
+    "downloadFile": 10000
   },
   "sitemapLocation": "sitemap.json",
   "navigateToMiniProgramAppIdList": [
-    "wx0f2ab26c0f65377d"
+    "wx0f2ab26c0f65377d",
+    "wx4a5990881a856d65"
   ]
 }

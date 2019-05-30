@@ -85,6 +85,7 @@ Page({
           maleyet
           femaleyet
           pt{
+            hash
             ptid
             ptorderstate
             name
@@ -100,6 +101,7 @@ Page({
               startdate
               enddate
               realsalary
+              isworked
             }
           }
         }
@@ -224,6 +226,7 @@ Page({
           ${e.detail.value ? `ptname: "${e.detail.value}"` : ''}
         ) {
           pt{
+            hash
             ptid
             ptorderstate
             name
@@ -239,6 +242,7 @@ Page({
               startdate
               enddate
               realsalary
+              isworked
             }
           }
         }

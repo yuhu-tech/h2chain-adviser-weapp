@@ -56,7 +56,7 @@
     <!-- search bar -->
     <wux-row>
       <view class='search_bar'>
-        <view class='search'>
+        <!-- <view class='search'>
           <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
             <view class='picker'>
               <view></view>
@@ -66,7 +66,7 @@
               </view>
             </view>
           </picker>
-        </view>
+        </view> -->
         <view class='search n200'>
           <input confirm-type='search' placeholder='输入姓名昵称' placeholder-class='search_p' bindconfirm='doSearch' bindinput='doSearch' />
         </view>
@@ -92,7 +92,9 @@
                   <wux-white-space body-style="height:10rpx" />
                   <view class='list_card_l_btm text_min n200'>
                     <text>{{item.gender===1?'男':'女'}}</text>
-                    <!-- <text class='list_card_l_btm_age'>24岁</text>
+                    <text class='list_card_l_btm_blank'>{{item.height||'--'}}cm</text>
+                    <text class='list_card_l_btm_blank'>{{item.weight||'--'}}kg</text>
+                    <!-- <text class='list_card_l_btm_blank'>24岁</text>
                     <text>这里显示微信昵称</text> -->
                   </view>
                 </view>
@@ -116,15 +118,14 @@
                 </wux-button>
               </view>
               <view class='list_card_btm_btm_remark' wx:else>
-                <view>
-                  <text class='list_card_btm_btm_remark_time'>工作时间：{{item.duration}}</text>
-                  <text>薪酬：{{item.remark.realsalary}}</text>
-                </view>
-                <view>
-                  <text class='b200' bindtap='doNote' data-item='{{item}}'>编辑</text>
-                </view>
+                <text wx:if="{{item.remark.isworked===2}}">未参加工作</text>
+                <text wx:else>工作时间：{{item.duration}} 薪酬：{{item.remark.realsalary}}</text>
+                <text class='b200' bindtap='doNote' data-item='{{item}}'>编辑</text>
               </view>
             </view>
+            <navigator class='list_card_btm_btm_chain b200' url='/pages/h2-order/chain-info/chain-info?hash={{item.hash}}'>
+              <text>查询凭证：{{item.hash}}</text>
+            </navigator>
           </view>
           <wux-white-space body-style="height:30rpx" />
         </view>
