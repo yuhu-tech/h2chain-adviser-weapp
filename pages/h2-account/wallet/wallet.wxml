@@ -7,7 +7,7 @@
       <text>鲸豆余额：{{info.balance}}</text>
     </view>
     <view class='card_btm b200'>
-      <text>地址：{{info.ptaddr}}</text>
+      <text>地址：{{info.adviseraddr}}</text>
     </view>
   </view>
 </view>

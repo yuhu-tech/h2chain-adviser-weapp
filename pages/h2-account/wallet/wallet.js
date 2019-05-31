@@ -31,7 +31,7 @@ Page({
     gql.query({
       query: `query{
         mywallet{
-          ptaddr
+          adviseraddr
           balance
         }
       }`

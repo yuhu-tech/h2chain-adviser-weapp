@@ -61,7 +61,7 @@
           </picker>
         </view>
         <view class='search n200'>
-          <input confirm-type='search' placeholder='输入姓名搜索' placeholder-class='search_p' bindconfirm='doSearchName' bindinput='doSearchName' />
+          <input confirm-type='search' placeholder='输入姓名搜索' value='{{ptname}}' placeholder-class='search_p' bindconfirm='doSearchName' bindinput='doSearchName' />
         </view>
       </view>
     </wux-row>
