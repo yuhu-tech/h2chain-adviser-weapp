@@ -1,0 +1,26 @@
+<!--pages/h2-order/prompt-close/prompt-close.wxml-->
+<view class='page'>
+  <view class='card'>
+    <image src='/images/bg-n.png' mode='aspectFill'></image>
+    <view class='position_top'>
+      <view class='card_icon'>
+        <image src='/images/bg-close.png'></image>
+        <view>订单已关闭</view>
+      </view>
+    </view>
+    <view class='position_btm'>
+      <view>
+        <wux-divider show-text="{{ false }}" />
+        <view class='position_btm_text'>
+          <text>已发送通知给PT/酒店/代理</text>
+        </view>
+      </view>
+    </view>
+
+  </view>
+  <view class='btn'>
+    <wux-button type='main' bind:click="goReturn">
+      <view class='text_btn'>返回</view>
+    </wux-button>
+  </view>
+</view>

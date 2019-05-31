@@ -1,0 +1,89 @@
+/* pages/h2-account/wallet/wallet.wxss */
+
+page {
+  background: #f0f0f0;
+  padding: 20rpx;
+}
+
+/* card */
+
+.card {
+  border-radius: 40rpx;
+  background: #fff;
+}
+
+.card_top {
+  background: #50d9e3;
+  border-top-left-radius: 40rpx;
+  border-top-right-radius: 40rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 30rpx;
+  color: #fff;
+}
+
+.card_top image {
+  height: 100rpx;
+  width: 100rpx;
+}
+
+.card_btm {
+  padding: 15rpx 30rpx;
+  display: flex;
+  justify-content: flex-end;
+  font-size: 26rpx;
+}
+
+.card_btm text {
+  font-size: 26rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 300rpx;
+}
+
+/* search */
+
+.search {
+  padding: 20rpx 0;
+}
+
+.picker {
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 32rpx;
+  padding: 0 20rpx;
+}
+
+/* list */
+
+.list {
+  padding: 0 20rpx;
+}
+
+.item {
+  border-top: solid 1rpx #e6e6e6;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40rpx 20rpx;
+}
+
+.item_l {
+  color: #f05d70;
+  font-weight: bold;
+}
+
+.item_r {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-size: 26rpx;
+}
+
+.item_bd {
+  border-bottom: solid 1rpx #e6e6e6;
+}

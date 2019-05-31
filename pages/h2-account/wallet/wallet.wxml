@@ -1,0 +1,13 @@
+<!--pages/h2-account/wallet/wallet.wxml-->
+<view class='page'>
+  <!-- card -->
+  <view class='card'>
+    <view class='card_top'>
+      <image src='/images/wallet.png' />
+      <text>鲸豆余额：{{info.balance}}</text>
+    </view>
+    <view class='card_btm b200'>
+      <text>地址：{{info.adviseraddr}}</text>
+    </view>
+  </view>
+</view>

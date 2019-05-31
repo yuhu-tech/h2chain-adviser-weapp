@@ -1,0 +1,57 @@
+/* pages/h2-order/list-order-note/list-order-note.wxss */
+
+page {
+  height: 100%;
+}
+
+.page {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.form {
+  width: 100%;
+}
+
+.item {
+  margin-top: 50rpx;
+  padding: 0 50rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.picker, .input {
+  position: relative;
+  width: 450rpx;
+  height: 60rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15rpx 0 15rpx 15rpx;
+  border-bottom: solid 1rpx #ececec;
+}
+
+.tip {
+  position: absolute;
+  font-size: 26rpx;
+  top: 70rpx;
+  right: 0;
+}
+
+/* btn */
+
+.btn {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 50rpx;
+}
+
+.wux-button {
+  width: 500rpx;
+}

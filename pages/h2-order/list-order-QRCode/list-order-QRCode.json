@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "wux-white-space": "wux-weapp/white-space",
+    "wux-qrcode": "wux-weapp/qrcode"
+  },
+  "navigationBarTitleText": "现场报名"
+}

@@ -1,0 +1,37 @@
+<!--pages/h2-order/list-order-QRCode/list-order-QRCode.wxml-->
+<view class='page'>
+  <view class='card'>
+    <view class='card_top'>
+      <image src='{{avatar}}'></image>
+      <text>{{order_info.originorder.occupation}}</text>
+    </view>
+    <view class='card_cen'>
+      <view class='card_cen_top'>
+        <view>
+          <text class='card_cen_top_l'>{{order_info.modifiedorder[0].date||order_info.originorder.date}}</text>
+          <text>{{order_info.modifiedorder[0].time||order_info.originorder.time}}</text>
+        </view>
+
+        <view wx:if="{{order_info.modifiedorder.length>0?(order_info.modifiedorder[0].changedmode===0):(order_info.originorder.mode===0)}}">
+          <text>{{order_info.countyet}}/{{order_info.modifiedorder[0].changedcount||order_info.originorder.count}} 人数</text>
+        </view>
+        <view wx:else>
+          <text class='card_cen_top_l'>{{order_info.maleyet}}/{{order_info.modifiedorder[0].changedmale||order_info.originorder.male}} 男</text>
+          <text>{{order_info.femaleyet}}/{{order_info.modifiedorder[0].changedfemale||order_info.originorder.female}} 女</text>
+        </view>
+
+      </view>
+      <wux-white-space body-style="height:30rpx" />
+      <view class='card_cen_btm'>
+        <view class='card_cen_btm_l'>{{order_info.hotel.hotelname}}</view>
+        <view>{{order_info.postorder.salary}}元/小时</view>
+      </view>
+    </view>
+    <view class='card_btm'>
+      <wux-white-space body-style="height:80rpx" />
+      <wux-qrcode id="qrcode" wux-class="qrcode" data="{{url}}" width="200" height="200" bind:click="previewImage" />
+      <wux-white-space body-style="height:40rpx" />
+      <text>邀请PT扫描二维码报名</text>
+    </view>
+  </view>
+</view>

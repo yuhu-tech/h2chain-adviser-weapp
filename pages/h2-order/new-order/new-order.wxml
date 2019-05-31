@@ -1,0 +1,91 @@
+<!--pages/h2-order/new-order/new-order.wxml-->
+<toptip id="inToptip" />
+
+<view class='page'>
+  <view class='page_bd'>
+
+    <view class='card_info'>
+      <view class='card'>
+        <view class='card_top'>
+          <image src='{{avatar}}' />
+          <text class='card_top_job'>{{order.originorder.occupation}}</text>
+          <text class='n200'>{{order.hotel.hotelname}}</text>
+        </view>
+        <view class='card_btm n200'>
+          <view>
+            <text class='card_btm_date'>{{order.originorder.date}}</text>
+            <text>{{order.originorder.time}}</text>
+          </view>
+          <view class="{{form.isFloat==='1'?'b200':''}}">
+
+            <view wx:if="{{order.originorder.mode===0}}">
+              <text>人数{{form.count}}</text>
+            </view>
+            <view wx:else>
+              <text class='card_btm_count_male'>男{{form.male}}</text>
+              <text>女{{form.female}}</text>
+            </view>
+
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class='form'>
+      <view class='form_item'>
+        <view class='form_item_label'>人数上浮5%</view>
+        <view class='form_item_radio'>
+          <radio-group class="radio-group" bindchange="radioChange">
+            <label class="radio" wx:for="{{items}}" wx:key="">
+              <radio value="{{item.value}}" checked="{{item.checked}}" color='#50d9e3' />{{item.name}}
+            </label>
+          </radio-group>
+        </view>
+      </view>
+      <wux-white-space body-style="height:30rpx" />
+      <view class='form_item'>
+        <view class='form_item_label'>用工单价</view>
+        <view class='form_item_ipt'>
+          <input placeholder='请输入' type='number' bindinput='iptSalary' />
+          <text class='n200'>元/时</text>
+        </view>
+      </view>
+      <wux-white-space body-style="height:50rpx" />
+      <view class='form_item_sp'>
+        <view class='form_item_label'>工作内容</view>
+        <view class='form_item_temp'>
+          <view class='form_item_temp_text n200' wx:if="{{form.workcontent}}">
+            <text>{{form.workcontent}}</text>
+          </view>
+          <view class='form_item_temp_link b200' bindtap='doChooseTemp' data-type='workcontents'>
+            <text>选择模板</text>
+            <wux-icon type="ios-arrow-round-forward" size='20' />
+          </view>
+        </view>
+      </view>
+      <wux-white-space body-style="height:50rpx" />
+      <view class='form_item_sp'>
+        <view class='form_item_label'>注意事项</view>
+        <view class='form_item_temp'>
+          <view class='form_item_temp_text n200' wx:if="{{form.attention}}">
+            <text>{{form.attention}}</text>
+          </view>
+          <view class='form_item_temp_link b200' bindtap='doChooseTemp' data-type='attentions'>
+            <text>选择模板</text>
+            <wux-icon type="ios-arrow-round-forward" size='20' />
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class='page_ft'>
+    <form report-submit='true' report-submit-timeout='10000' bindsubmit='doSubmit'>
+      <button class='form_button' hover-class='form_button_hover' form-type='submit' disabled='{{isDisabled}}'>
+        <view class='text_btn'>发布招聘</view>
+      </button>
+    </form>
+    <wux-white-space body-style="height:50rpx" />
+  </view>
+
+</view>

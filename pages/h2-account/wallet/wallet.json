@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "wux-icon": "wux-weapp/icon"
+  },
+  "navigationBarTitleText": "鲸豆中心"
+}

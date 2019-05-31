@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "wux-button": "wux-weapp/button"
+  },
+  "navigationBarTitleText": "编辑模板"
+}

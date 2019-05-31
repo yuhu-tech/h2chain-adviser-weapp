@@ -1,0 +1,21 @@
+<!--pages/h2-account/setting/setting.wxml-->
+<view class="page">
+  <view class="page__bd">
+    <wux-white-space body-style='height:20rpx' />
+    <wux-row>
+      <wux-cell-group>
+        <wux-cell title="合作协议" isLink url="/pages/h2-account/term/term" />
+        <view class='bd_btm' />
+        <wux-cell title="版本信息" isLink url="/pages/h2-account/version/version" />
+        <view class='bd_btm' />
+        <wux-cell title="修改密码" isLink url="/pages/h2-account/change-password/change-password" />
+        <view class='bd_btm' />
+      </wux-cell-group>
+    </wux-row>
+    <wux-row>
+      <view class='logout b200'>
+        <text bindtap='doLogout'>退出登录</text>
+      </view>
+    </wux-row>
+  </view>
+</view>

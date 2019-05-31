@@ -1,0 +1,70 @@
+<!--pages/h2-account/login/login.wxml-->
+<toptip id="inToptip" />
+
+<!-- <view class="cu-modal {{modalName=='show'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class='content'>申请授权</view>
+      <view class='action' bindtap='hideModal'>
+        <text class='icon-close text-red'></text>
+      </view>
+    </view>
+    <view class='padding-xl bg-white'>
+      <view>为了给您提供更好的服务</view>
+      <wux-white-space body-style='height:10rpx' />
+      <view>需要您的微信授权</view>
+    </view>
+    <view class="cu-bar bg-white">
+      <view class='action'>
+        <wux-button type='main' outline bindtap='hideModal'>
+          <view class='text_btn'>取消</view>
+        </wux-button>
+        <wux-button type='main' open-type='getUserInfo' bindgetuserinfo="bindGetUserInfo">
+          <view class='text_btn'>授权</view>
+        </wux-button>
+      </view>
+    </view>
+  </view>
+</view> -->
+
+<view class="page">
+  <view class="page__hd">
+    <view class="page__title"></view>
+    <view class="page__desc"></view>
+  </view>
+  <view class="page__bd">
+    <wux-white-space body-style='height:50rpx' />
+    <wux-row>
+      <view class='text_title'>欢迎来到 H2Chain</view>
+      <view class='text_tip n200'>请输入密码和账号来登陆系统</view>
+    </wux-row>
+    <wux-white-space body-style='height:150rpx' />
+    <wux-row>
+      <wux-input clear controlled value="{{email}}" placeholder='请输入您的账号' bind:change="iptEmail" bind:clear="clearEmail" />
+    </wux-row>
+    <wux-white-space body-style='height:80rpx' />
+    <wux-row>
+      <wux-input password clear placeholder='请输入您的密码' bind:change="iptPassword" bind:clear="clearPassword" bind:confirm="isValidate" />
+    </wux-row>
+    <wux-white-space body-style='height:80rpx' />
+    <wux-row>
+      <wux-button type='main' bind:click="isValidate" disabled='{{isDisabled}}'>
+        <view class='text_btn'>
+          <view class='btn_login'>
+            <text>登录</text>
+            <text>→</text>
+          </view>
+        </view>
+
+      </wux-button>
+    </wux-row>
+    <wux-white-space body-style='height:80rpx' />
+    <wux-row>
+      <view class='n200'>忘记密码？</view>
+      <view class='b200'>
+        <text bindtap='doCall'>请联系客服</text>
+      </view>
+    </wux-row>
+
+  </view>
+</view>

@@ -1,0 +1,145 @@
+/* pages/h2-order/chain_info/chain_info.wxss */
+
+page {
+  background: #f8f8f8;
+}
+
+/* address */
+
+.address {
+  padding: 20rpx 30rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+}
+
+.addr_title {
+  padding-bottom: 30rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+}
+
+.addr_item {
+  width: 100%;
+  height: 70rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20rpx;
+}
+
+.addr_item_value {
+  font-size: 28rpx;
+  width: 400rpx;
+  word-break: break-all;
+  word-wrap: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: right;
+}
+
+.addr_logo {
+  height: 100rpx;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  border-top: solid 1rpx #eee;
+  margin-top: 20rpx;
+}
+
+.addr_logo image {
+  height: 100rpx;
+  width: 300rpx;
+}
+
+/* tripartite */
+
+.tripartite {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20rpx 30rpx 100rpx;
+}
+
+.tripartite_title {
+  padding: 10rpx;
+  font-weight: bold;
+}
+
+.tripartite_value {
+  font-size: 28rpx;
+  width: 300rpx;
+  word-break: break-all;
+  word-wrap: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: right;
+}
+
+.item {
+  margin-top: 30rpx;
+  border-radius: 7rpx;
+  width: 100%;
+  background: #fff;
+}
+
+.item_title {
+  background: #50d9e3;
+  display: flex;
+  justify-content: space-between;
+  padding: 10rpx 20rpx;
+  width: 100%;
+  border-top-left-radius: 7rpx;
+  border-top-right-radius: 7rpx;
+  color: #fff;
+}
+
+.item_title_n {
+  background: #c8c8c8;
+}
+
+.item_cont {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 25rpx 35rpx;
+  width: 100%;
+}
+
+.item_cont_item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.item_cont_item_blank {
+  padding: 10rpx 0 0;
+}
+
+/* expand */
+
+.expand {
+  font-size: 28rpx;
+  word-break: break-all;
+  word-wrap: break-word;
+  text-align: left;
+  padding: 0 20rpx;
+}
+
+.expand_tripartite {
+  width: 100%;
+  font-size: 28rpx;
+  word-break: break-all;
+  word-wrap: break-word;
+  text-align: left;
+  padding-top: 10rpx;
+}

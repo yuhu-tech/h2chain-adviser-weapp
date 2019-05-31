@@ -1,0 +1,109 @@
+/* pages/h2-order/prompt-success/prompt-success.wxss */
+
+page {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+/* card */
+
+.card {
+  margin: 0 30rpx;
+  border-radius: 5rpx;
+  box-shadow: 0 0 20rpx #c8c8c8;
+  height: 900rpx;
+  position: relative;
+}
+
+.card image {
+  width: 100%;
+  height: 100%;
+}
+
+/* card_top */
+
+.position_top {
+  position: absolute;
+  width: 100%;
+  top: 10%;
+}
+
+.card_icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 14pt;
+}
+
+.card_icon image {
+  height: 250rpx;
+  width: 250rpx;
+  margin-bottom: 20rpx;
+}
+
+/* card_btm */
+
+.position_btm {
+  position: absolute;
+  width: 100%;
+  bottom: 5%;
+}
+
+.position_btm_text {
+  text-align: center;
+}
+
+.card_share {
+  display: flex;
+  justify-content: space-around;
+}
+
+.card_share button {
+  background-color: #fff;
+  line-height: normal;
+  padding: 0;
+  margin: 0;
+}
+
+.card_share button::after {
+  border: none;
+}
+
+.card_share_item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 10pt;
+}
+
+.card_share_item image {
+  height: 100rpx;
+  width: 100rpx;
+  border-radius: 10rpx;
+  margin-bottom: 10rpx;
+}
+
+/* btn */
+
+.btn {
+  display: flex;
+  justify-content: center;
+}
+
+.btn_text {
+  width: 500rpx;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* divider */
+
+.wux-divider {
+  border-top: solid 1rpx #eee !important;
+}

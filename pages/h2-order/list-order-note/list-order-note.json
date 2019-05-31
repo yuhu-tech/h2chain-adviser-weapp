@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "wux-white-space": "wux-weapp/white-space",
+    "wux-icon": "wux-weapp/icon",
+    "wux-button": "wux-weapp/button",
+    "toptip": "/components/toptip/toptip"
+  },
+  "navigationBarTitleText": "用工备注"
+}

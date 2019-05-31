@@ -1,0 +1,67 @@
+/* pages/h2-order/list-order-QRCode/list-order-QRCode.wxss */
+
+.page {
+  display: flex;
+  justify-content: center;
+  padding: 50rpx 30rpx;
+}
+
+.card {
+  box-shadow: 0 0 20rpx #c8c8c8;
+  width: 690rpx;
+  height: 1000rpx;
+}
+
+/* card_top */
+
+.card_top {
+  display: flex;
+  align-items: center;
+  padding: 30rpx 30rpx 20rpx;
+  border-bottom: solid 1rpx #eee;
+}
+
+.card_top image {
+  height: 70rpx;
+  width: 70rpx;
+  border-radius: 10%;
+  margin-right: 30rpx;
+  border: solid 1rpx rgba(200, 200, 200, 0.5);
+}
+
+/* card_cen */
+
+.card_cen {
+  padding: 30rpx;
+  border-bottom: solid 1rpx #eee;
+  display: flex;
+  flex-direction: column;
+}
+
+.card_cen_top, .card_cen_btm {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card_cen_top_l {
+  margin-right: 20rpx;
+}
+
+.card_cen_btm_l {
+  padding-right: 20rpx;
+  border-right: solid 1rox #eee;
+}
+
+/* card_btm */
+
+.card_btm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.card_btm image {
+  height: 400rpx;
+  width: 400rpx;
+}

@@ -1,0 +1,36 @@
+/* pages/h2-account/login/login.wxss */
+
+.page {
+  padding: 0rpx 40rpx;
+}
+
+.page__bd .wux-button {
+  min-height: 88rpx !important;
+  line-height: normal !important;
+  height: 88rpx;
+}
+
+.btn_login {
+  width: 350rpx;
+  display: flex;
+  justify-content: space-between;
+}
+
+.wux-input {
+  border-bottom: solid 1rpx #eee;
+  padding: 20rpx 0 10rpx;
+}
+
+.padding-xl {
+  border-top: solid 1rpx #eee;
+  border-bottom: solid 1rpx #eee;
+}
+
+.action {
+  width: 100%;
+  justify-content: space-around !important;
+}
+
+.action button {
+  width: 200rpx;
+}

@@ -1,0 +1,77 @@
+/* pages/h2-order/template-order/template-order.wxss */
+
+.radio-group {
+  padding: 0 30rpx;
+}
+
+/* list */
+
+.radio {
+  display: flex;
+  justify-content: space-between;
+  padding: 30rpx 0;
+  border-bottom: solid 1rpx #eee;
+}
+
+.radio_l {
+  display: flex;
+  padding: 10rpx 0;
+}
+
+.radio_content {
+  width: 400rpx;
+  padding: 0 30rpx;
+  box-sizing: border-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+}
+
+.radio_edit {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  border-left: solid 1rpx #eee;
+  padding-left: 30rpx;
+}
+
+/* fab */
+
+.fake {
+  position: relative;
+}
+
+.fab {
+  height: 80rpx;
+  width: 80rpx;
+  background-color: #fecb91;
+  border-radius: 50%;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 10rpx #fecb91;
+  position: absolute;
+  top: 50rpx;
+  right: 0;
+}
+
+/* btn */
+
+.btn_box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 30rpx 0;
+  background-color: #fff;
+  box-shadow: 0 0 20rpx #eee;
+}
+
+.text_btn {
+  width: 500rpx;
+}
